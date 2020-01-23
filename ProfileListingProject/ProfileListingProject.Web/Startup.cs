@@ -13,11 +13,17 @@ using Microsoft.EntityFrameworkCore;
 using ProfileListingProject.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using ProfileListingProject.Core;
+using ProfileListingProject.Data;
+using ProfileListingProject.Core.Contexts;
 
 namespace ProfileListingProject.Web
 {
     public class Startup
     {
+        public static IContainer AutoFacContainer;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,7 +32,7 @@ namespace ProfileListingProject.Web
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -35,14 +41,29 @@ namespace ProfileListingProject.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            var migrationAssemblyName = typeof(Startup).Assembly.FullName;
+
+            services.AddDbContext<ApplicationDbContext>(options => 
+                options.UseSqlServer(connectionString,m => m.MigrationsAssembly(migrationAssemblyName)));
+
+            services.AddDbContext<StoreContext>(x => 
+                x.UseSqlServer(connectionString, m => m.MigrationsAssembly(migrationAssemblyName)));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddEntityFrameworkSqlServer();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            var builder = new ContainerBuilder();
+            builder.Populate(services);
+            builder.RegisterModule(new CoreModule(Configuration,connectionString,migrationAssemblyName));
+            builder.RegisterModule(new DataModule());
+            AutoFacContainer = builder.Build();
+            return new AutofacServiceProvider(AutoFacContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
