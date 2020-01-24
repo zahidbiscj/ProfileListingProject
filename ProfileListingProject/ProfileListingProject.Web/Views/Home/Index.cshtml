@@ -2,6 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 
+@**@
+
 @section styles
 {
 
@@ -12,38 +14,15 @@
 
 }
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <title>@ViewBag.Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Your page description here" />
-    <meta name="author" content="" />
-
-    
-
-    <!-- =======================================================
-      Theme Name: Eterna
-      Theme URL: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/
-      Author: BootstrapMade.com
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
-</head>
-
-<body>
-
+<div class="row">
     <div id="wrapper">
         <!-- section featured -->
         <section id="featured">
-
             <!-- slideshow start here -->
-
             <div class="camera_wrap" id="camera-slide">
-
                 <!-- slide 1 here -->
-                <div data-src="img/slides/camera/slide1/img1.jpg">
+                <div data-src="/img/slides/camera/slide1/img1.jpg">
                     <div class="camera_caption fadeFromLeft">
                         <div class="container">
                             <div class="row">
@@ -58,7 +37,7 @@
                                     </a>
                                 </div>
                                 <div class="span6">
-                                    <img src="img/slides/camera/slide1/screen.png" alt="" class="animated bounceInDown delay1" />
+                                    <img src="/img/slides/camera/slide1/screen.png" alt="" class="animated bounceInDown delay1" />
                                 </div>
                             </div>
                         </div>
@@ -66,12 +45,12 @@
                 </div>
 
                 <!-- slide 2 here -->
-                <div data-src="img/slides/camera/slide2/img1.jpg">
+                <div data-src="/img/slides/camera/slide2/img1.jpg">
                     <div class="camera_caption fadeFromLeft">
                         <div class="container">
                             <div class="row">
                                 <div class="span6">
-                                    <img src="img/slides/camera/slide2/iMac.png" alt="" />
+                                    <img src="/img/slides/camera/slide2/iMac.png" alt="" />
                                 </div>
                                 <div class="span6">
                                     <h2 class="animated fadeInDown"><strong>Put your <span class="colored">Opt in form</span></strong></h2>
@@ -90,14 +69,14 @@
                 </div>
 
                 <!-- slide 3 here -->
-                <div data-src="img/slides/camera/slide2/img1.jpg">
+                <div data-src="/img/slides/camera/slide2/img1.jpg">
                     <div class="camera_caption fadeFromLeft">
                         <div class="container">
                             <div class="row">
                                 <div class="span12 aligncenter">
                                     <h2 class="animated fadeInDown"><strong><span class="colored">Responsive</span> and <span class="colored">cross broswer</span> compatibility</strong></h2>
                                     <p class="animated fadeInUp">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
-                                    <img src="img/slides/camera/slide3/browsers.png" alt="" class="animated bounceInDown delay1" />
+                                    <img src="/img/slides/camera/slide3/browsers.png" alt="" class="animated bounceInDown delay1" />
                                 </div>
                             </div>
                         </div>
@@ -114,6 +93,68 @@
         <section id="content">
             <div class="container">
 
+                <div class="row">
+                    <div class="span12">
+                        <h2 class="text-bold aligncenter">Featured Companies</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span12">
+                        <div class="row">
+                            <div class="span4">
+                                <div class="box flyLeft">
+                                    <div class="icon">
+                                        <i class="ico icon-circled icon-bgdark icon-star active icon-3x"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h4>High <strong>Quality</strong></h4>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
+                                        </p>
+                                        <a href="#">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="span4">
+                                <div class="box flyIn">
+                                    <div class="icon">
+                                        <i class="ico icon-circled icon-bgdark icon-dropbox active icon-3x"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h4>Rich of <strong>Features</strong></h4>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
+                                        </p>
+                                        <a href="#">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span4">
+                                <div class="box flyRight">
+                                    <div class="icon">
+                                        <i class="ico icon-circled icon-bgdark icon-laptop active icon-3x"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h4>Modern <strong>Design</strong></h4>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.
+                                        </p>
+                                        <a href="#">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span12">
+                        <h2 class="text-bold aligncenter">New Members</h2>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="span12">
@@ -300,7 +341,7 @@
                                     feugiat
                                 </blockquote>
                                 <div class="testimonial-autor">
-                                    <img src="img/dummies/testimonial/1.png" alt="" />
+                                    <img src="~/img/dummies/testimonial/1.png" alt="" />
                                     <h4>Hillary Doe</h4>
                                     <a href="#">www.companyname.com</a>
                                 </div>
@@ -311,7 +352,7 @@
                                     feugiat
                                 </blockquote>
                                 <div class="testimonial-autor">
-                                    <img src="img/dummies/testimonial/2.png" alt="" />
+                                    <img src="~/img/dummies/testimonial/2.png" alt="" />
                                     <h4>Michael Doe</h4>
                                     <a href="#">www.companyname.com</a>
                                 </div>
@@ -322,7 +363,7 @@
                                     feugiat
                                 </blockquote>
                                 <div class="testimonial-autor">
-                                    <img src="img/dummies/testimonial/3.png" alt="" />
+                                    <img src="~/img/dummies/testimonial/3.png" alt="" />
                                     <h4>Mark Donovan</h4>
                                     <a href="#">www.companyname.com</a>
                                 </div>
@@ -333,7 +374,7 @@
                                     feugiat
                                 </blockquote>
                                 <div class="testimonial-autor">
-                                    <img src="img/dummies/testimonial/4.png" alt="" />
+                                    <img src="~/img/dummies/testimonial/4.png" alt="" />
                                     <h4>Marry Doe Elliot</h4>
                                     <a href="#">www.companyname.com</a>
                                 </div>
@@ -358,11 +399,11 @@
                                 <div class="span3">
                                     <div class="item">
                                         <figure>
-                                            <div><img src="img/dummies/works/1.jpg" alt="" /></div>
+                                            <div><img src="~/img/dummies/works/1.jpg" alt="" /></div>
                                             <figcaption>
                                                 <div>
                                                     <span>
-                                                        <a href="img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class="icon-plus icon-circled icon-bglight icon-2x"></i></a>
+                                                        <a href="~/img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class="icon-plus icon-circled icon-bglight icon-2x"></i></a>
                                                     </span>
                                                     <span>
                                                         <a href="#"><i class="icon-file icon-circled icon-bglight icon-2x"></i></a>
@@ -375,11 +416,11 @@
                                 <div class="span3">
                                     <div class="item">
                                         <figure>
-                                            <div><img src="img/dummies/works/2.jpg" alt="" /></div>
+                                            <div><img src="~/img/dummies/works/2.jpg" alt="" /></div>
                                             <figcaption>
                                                 <div>
                                                     <span>
-                                                        <a href="img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class="icon-plus icon-circled icon-bglight icon-2x"></i></a>
+                                                        <a href="~/img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class="icon-plus icon-circled icon-bglight icon-2x"></i></a>
                                                     </span>
                                                     <span>
                                                         <a href="#"><i class="icon-file icon-circled icon-bglight icon-2x"></i></a>
@@ -392,11 +433,11 @@
                                 <div class="span3">
                                     <div class="item">
                                         <figure>
-                                            <div><img src="img/dummies/works/3.jpg" alt="" /></div>
+                                            <div><img src="~/img/dummies/works/3.jpg" alt="" /></div>
                                             <figcaption>
                                                 <div>
                                                     <span>
-                                                        <a href="img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class="icon-plus icon-circled icon-bglight icon-2x"></i></a>
+                                                        <a href="~/img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class="icon-plus icon-circled icon-bglight icon-2x"></i></a>
                                                     </span>
                                                     <span>
                                                         <a href="#"><i class="icon-file icon-circled icon-bglight icon-2x"></i></a>
@@ -409,11 +450,11 @@
                                 <div class="span3">
                                     <div class="item">
                                         <figure>
-                                            <div><img src="img/dummies/works/4.jpg" alt="" /></div>
+                                            <div><img src="~/img/dummies/works/4.jpg" alt="" /></div>
                                             <figcaption>
                                                 <div>
                                                     <span>
-                                                        <a href="img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class="icon-plus icon-circled icon-bglight icon-2x"></i></a>
+                                                        <a href="~/img/dummies/works/big.png" data-pretty="prettyPhoto[gallery1]" title="Portfolio caption here"><i class="icon-plus icon-circled icon-bglight icon-2x"></i></a>
                                                     </span>
                                                     <span>
                                                         <a href="#"><i class="icon-file icon-circled icon-bglight icon-2x"></i></a>
@@ -433,8 +474,4 @@
     </div>
     <a href="#" class="scrollup"><i class="icon-angle-up icon-square icon-bglight icon-2x active"></i></a>
 
-   
-
-</body>
-</html>
-
+</div>
