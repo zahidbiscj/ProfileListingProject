@@ -1,75 +1,87 @@
-﻿
+﻿@model ProfileListingProject.Web.Areas.Manager.Models.ProductUpdateModel
 @{
     ViewData["Title"] = "Add";
 }
 
-@section scripts
+@section styles
 {
-   
 
 }
 
+@section scripts
+{
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <script>
+        @*START Jquery Add row for product Feature*@
+        $(document).ready(function(){
+              var i=1;
+              $('#add').click(function(){
+                   i++;
+                   $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="ProductFeatures[0].Name" placeholder="Product Name" class="form-control name_list" /></td><td><textarea name = "ProductFeatures[0].Description" rows="4" cols="40"></textarea></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+              });
+              $(document).on('click', '.btn_remove', function(){
+                   var button_id = $(this).attr("id");
+                   $('#row'+button_id+'').remove();
+              });
+       });
+        @* END Jquery Add row for product Feature*@
+
+    </script>
+}
+
 <form asp-controller="Product" asp-action="Add" method="post" class="form-horizontal">
+    @Html.AntiForgeryToken()
     <div class="card card-secondary">
         <div class="card-body">
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label asp-for="ProductName" class="control-label">Product Name</label>
-                    <input asp-for="ProductName" class="form-control form-control-sm" />
-                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                    <label asp-for="Name" class="control-label">Product Name</label>
+                    <input name="Name" asp-for="Name" class="form-control form-control-sm" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label asp-for="ProductDescription" class="control-label">Description</label>
-                    <textarea asp-for="ProductDescription" class="form-control" rows="3"></textarea>
-                    <span asp-validation-for="ProductDescription" class="text-danger"></span>
+                    <label asp-for="Description" class="control-label">Description</label>
+                    <textarea name ="Description" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
                 <div class="form-group col-md-4">
                     <label asp-for="Categories" class="control-label">Categories</label>
-                    <select asp-for="Categories"
-                            asp-items="" class="form-control form-control-sm select2" style="width: 100%;">
+                    <select name="Categories" class="form-control form-control-sm select2" style="width: 100%;">
                         <option>Please select one</option>
-                        <option>ECommerce</option>
-                        <option>Software Development</option>
+                        <option value="ECommerce">ECommerce</option>
+                        <option value="Software Development">Software Development</option>
                     </select>
                     <span asp-validation-for="Categories" class="text-danger"></span>
                 </div>
-                <div class="form-group  col-md-4">
-                    <label>Minimal</label>
-                    <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">Alabama</option>
-                        <option>Alaska</option>
-                        <option>California</option>
-                        <option>Delaware</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Washington</option>
-                    </select>
+                @*  Start Jquery For Product Feature Add  *@
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dynamic_field">
+                        <tr>
+                            <td><input type="text" name="ProductFeatures[0].Name" placeholder="Product Name" class="form-control name_list" /></td>
+                            <td><textarea name="ProductFeatures[0].Description" rows="4" cols="40"></textarea></td>
+                            <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
+                        </tr>
+                    </table>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group  col-md-12">
-                    <label>Features</label>
-                    <button onclick="myFunction()">Try it</button>
-                    <script>
-                        function myFunction() {
-                            var x = document.createElement("INPUT");
-                            x.setAttribute("type", "text");
-                            x.setAttribute("value", "Hello World!");
-                            document.body.appendChild(x);
-                        }
-                    </script>
-                </div>
+                @* END Jquery For Product Feature Add  *@
             </div>
         </div>
     </div>
+
     <div class="card-footer">
         <div class="float-left">
             <button type="submit" class="btn btn-info pull-left">Submit</button>
         </div>
         <div class="float-right">
-            <a asp-area="admin" asp-controller="employee" asp-action="Index" class="btn btn-outline-info pull-right">Back To List</a>
+            <a asp-area="Manager" asp-controller="Product" asp-action="Index" class="btn btn-outline-info pull-right">Back To List</a>
         </div>
     </div>
 </form>
+
+
+
+
 
