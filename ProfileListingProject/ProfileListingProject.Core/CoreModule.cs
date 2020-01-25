@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using ProfileListingProject.Core.Contexts;
 using ProfileListingProject.Core.Repositories;
+using ProfileListingProject.Core.Repositories.Interface;
 using ProfileListingProject.Core.Services;
 using ProfileListingProject.Core.Services.Interface;
 using ProfileListingProject.Core.UnitOfWorks;
@@ -42,6 +43,11 @@ namespace ProfileListingProject.Core
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<CategoryService>().As<ICategoryService>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ProductFeatureRepository>().As<IProductFeatureRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<ProductFeatureService>().As<IProductFeatureService>()
                 .InstancePerLifetimeScope();
 
             base.Load(builder);

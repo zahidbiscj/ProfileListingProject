@@ -36,14 +36,14 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
 
                 Notification = new NotificationModel("Success!", "Category successfuly created", NotificationType.Success);
             }
-            catch (InvalidOperationException iex)
+            catch (InvalidOperationException)
             {
                 Notification = new NotificationModel(
                     "Failed!",
                     "Failed to create category, please provide valid name",
                     NotificationType.Fail);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Notification = new NotificationModel(
                     "Failed!",
@@ -64,14 +64,14 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
 
                 Notification = new NotificationModel("Success!", "Category successfuly updated", NotificationType.Success);
             }
-            catch (InvalidOperationException iex)
+            catch (InvalidOperationException)
             {
                 Notification = new NotificationModel(
                     "Failed!",
                     "Failed to update category, please provide valid name",
                     NotificationType.Fail);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Notification = new NotificationModel(
                     "Failed!",
