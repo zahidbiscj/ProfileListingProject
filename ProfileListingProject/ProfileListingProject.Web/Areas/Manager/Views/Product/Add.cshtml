@@ -1,4 +1,5 @@
 ﻿@model ProfileListingProject.Web.Areas.Manager.Models.ProductUpdateModel
+
 @{
     ViewData["Title"] = "Add";
 }
@@ -24,7 +25,7 @@
     <script>
         @*START Jquery Add row for product Feature*@
 
-        $('#btnAddTripExp').on('click', function () {
+       $('#btnAddTripExp').on('click', function () {
 
         var num = $('.clonedInputTripExp').length,
 
@@ -106,105 +107,105 @@
     <div class="card card-secondary">
         <div class="card-body">
             <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label asp-for="Name" class="control-label">Product Name</label>
-                    <input name="Name" asp-for="Name" class="form-control form-control-sm" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-6">
-                    <label asp-for="Description" class="control-label">Description</label>
-                    <textarea name="Description" class="form-control" rows="3"></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
+                     <div class="form-group col-md-4">
+                        <label asp-for="Name" class="control-label">Product Name</label>
+                        <input name="Name" asp-for="Name" class="form-control form-control-sm" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Description" class="control-label">Description</label>
+                        <textarea name="Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group col-md-4">
-                    <label asp-for="Categories" class="control-label">Categories</label>
-                    <select name="Categories" class="form-control form-control-sm select2" style="width: 100%;">
-                        <option>Please select one</option>
-                        <option value="ECommerce">ECommerce</option>
-                        <option value="Software Development">Software Development</option>
-                    </select>
-                    <span asp-validation-for="Categories" class="text-danger"></span>
-                </div>
-                @*  Start Jquery For Product Feature Add  *@
+                    <div class="form-group col-md-4">
+                        <label asp-for="Categories" class="control-label">Categories</label>
+                        <select name="Categories" class="form-control form-control-sm select2" style="width: 100%;">
+                            <option>Please select one</option>
+                            <option value="ECommerce">ECommerce</option>
+                            <option value="Software Development">Software Development</option>
+                        </select>
+                        <span asp-validation-for="Categories" class="text-danger"></span>
+                    </div>
             </div>
+            @*  Start Jquery For Product Feature Add  *@
+        <div class="form-row">
+            <div class="panel-body w-100">
+                <div class="col-md-12 searched-content">
 
-                <div  class="form-row"> 
-                    <div class="panel-body w-100">
-                        <div class="col-md-12 searched-content">
-
-                            <div class="row">
-                                <div class="col-md-5 pl-xs">
-                                    <h4 class="p-none" style="color: #c13832; font-weight: bold">Add Product Features</h4>
-                                </div>
-
-                                <div class="col-md-5 pull-right">
-                                    <button class="btn btn-primary input-sm pull-right " type="button" name="btnAddTripExp" id="btnAddTripExp">
-                                        Add <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-
-
-                            </div>
-                            <div class="row">
-                                <table class="table table-bordered table-striped table-condensed mb-none" id="tblExpenseCount">
-                                    <thead>
-                                        <tr>
-                                            <th>#SL</th>
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                        @{
-                                            int x = 1;
-                                        }
-
-                                        <tr class="clonedInputTripExp" id="entryTripExp@{@x}">
-                                            <td>1</td>
-                                            <td>
-                                                @Html.TextBox("ProductFeatures[0].Name", null, htmlAttributes: new { @class = "form-control input-sm Name" })
-                                            </td>
-
-                                            <td>
-                                                @Html.TextBox("ProductFeatures[0].Description", null, htmlAttributes: new { @class = "form-control input-sm Description", @required = "required", @onchange = "getTotal()" })
-                                            </td>
-
-                                            <td class="text-center">
-                                                <a href="javascript:void(0)" class="btnDelTripExp" style="cursor: pointer;">
-                                                    @*<i class="fa fa-times tip pointer"></i>*@
-                                                    <button type="button">X</button>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-3 pl-xs">
+                            <h4 class="p-none" style="color: #c13832; font-weight: bold">Expense Info</h4>
                         </div>
-                  
+
+                        <div class="col-md-2 pull-right">
+                            <button class="btn btn-primary input-sm pull-right " type="button" name="btnAddTripExp" id="btnAddTripExp">
+                                Add <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
 
 
+                    </div>
+                    <div class="row">
+                        <table class="table table-bordered table-striped table-condensed mb-none" id="tblExpenseCount">
+                            <thead>
+                                <tr>
+                                    <th>#SL</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
 
+                            <tbody>
 
+                                @{
+                                    int x = 1;
+                                }
 
-                    <div class="col-md-6 pull-right">
+                                <tr class="clonedInputTripExp" id="entryTripExp@{@x}">
 
-                        <button class="btn btn-success pull-right" type="submit" name="btnSubmit">
-                            Submit <i class="fa fa-arrow-circle-right"></i>
-                        </button>
+                                    <td class="Sl">1</td>
+                                    <td>
+                                        @Html.TextBox("ProductFeatures[0].Name", null, htmlAttributes: new { @class = "form-control input-sm Name p-3" })
+                                    </td>
 
-                        <button class="btn btn-danger pull-right mr-sm" name="btnReset" id="statusReset">
-                            Reset <i class="fa fa-refresh"></i>
-                        </button>
+                                    <td>
+                                        @Html.TextBox("ProductFeatures[0].Description", null, htmlAttributes: new { @class = "form-control input-sm Description p-3", @required = "required", @onchange = "getTotal()" })
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a href="javascript:void(0)" class="btnDelTripExp" style="cursor: pointer;">
+                                            @*<i class="fa fa-times tip pointer"></i>*@
+                                            <button type="button">X</button>
+                                        </a>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                @* END Jquery For Product Feature Add  *@
             </div>
+
+
+
+
+
+                <div class="col-md-6 pull-right">
+
+                    <button class="btn btn-success pull-right" type="submit" name="btnSubmit">
+                        Submit <i class="fa fa-arrow-circle-right"></i>
+                    </button>
+
+                    <button class="btn btn-danger pull-right mr-sm" name="btnReset" id="statusReset">
+                        Reset <i class="fa fa-refresh"></i>
+                    </button>
+                </div>
+            </div>
+
+            @* END Jquery For Product Feature Add  *@
         </div>
     </div>
 
@@ -217,6 +218,7 @@
         </div>
     </div>
 </form>
+
 
 
 
