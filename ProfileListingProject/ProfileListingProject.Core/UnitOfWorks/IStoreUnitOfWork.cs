@@ -12,5 +12,6 @@ namespace ProfileListingProject.Core.UnitOfWorks
     {
         ICategoryRepository CategoryRepository { get; set; }
         IProductFeatureRepository ProductFeatureRepository { get; set; }
+        IProductRepository ProductRepository { get; set; }
     }
 }

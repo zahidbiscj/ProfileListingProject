@@ -1,10 +1,19 @@
-﻿using System;
+﻿using ProfileListingProject.Core.Contexts;
+using ProfileListingProject.Core.Entities;
+using ProfileListingProject.Core.Repositories.Interface;
+using ProfileListingProject.Data;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ProfileListingProject.Core.Repositories
 {
-    interface ProductRepository
+    public class ProductRepository : Repository<Product>, IProductRepository
     {
+        public ProductRepository(IStoreContext storeContext)
+            : base((StoreContext)storeContext)
+        {
+
+        }
     }
 }

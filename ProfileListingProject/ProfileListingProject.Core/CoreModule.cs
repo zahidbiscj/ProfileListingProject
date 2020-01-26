@@ -50,6 +50,9 @@ namespace ProfileListingProject.Core
             builder.RegisterType<ProductFeatureService>().As<IProductFeatureService>()
                 .InstancePerLifetimeScope();
 
+            builder.RegisterType<ProductService>().As<IProductService>()
+                .InstancePerLifetimeScope();
+
             base.Load(builder);
         }
     }

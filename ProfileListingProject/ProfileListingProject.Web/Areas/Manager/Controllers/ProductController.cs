@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProfileListingProject.Web.Areas.Manager.Models;
+using ProfileListingProject.Web.Models;
 
 namespace ProfileListingProject.Web.Areas.Manager.Controllers
 {
@@ -12,12 +13,16 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var model = new ProductViewModel();
+            return View(model);
         }
 
         public IActionResult GetProducts()
         {
-            return View();
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var model = new ProductViewModel();
+            var data = model.GetProducts(tableModel);
+            return Json(data);
         }
 
         public IActionResult Add()
@@ -29,6 +34,10 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Add(ProductUpdateModel model)
         {
+            if(ModelState.IsValid)
+            {
+                model.AddNewProduct();
+            }
             return View(model);
         }
     }
