@@ -34,11 +34,11 @@
 
         var newIda = $('#entryTripExp' + num).find('.Sl').html(),
             newId = parseInt(newIda) + 1;
-        newElem.find('.Remarks').parent().attr('for', 'ID' + newId + 'Remarks');
-        newElem.find('.Remarks').attr('id', 'ID' + newId + 'Remarks').val('').attr('name', 'ExpInfo[' + newIda + '].Remarks').val('');
+        newElem.find('.Name').parent().attr('for', 'ID' + newId + 'Name');
+        newElem.find('.Name').attr('id', 'ID' + newId + 'Name').val('').attr('name', 'ProductFeatures[' + newIda + '].Name').val('');
 
-        newElem.find('.Amount').parent().attr('for', 'ID' + newId + 'Amount');
-        newElem.find('.Amount').attr('id', 'ID' + newId + 'Amount').val('').attr('name', 'ExpInfo[' + newIda + '].Amount').val('');
+        newElem.find('.Description').parent().attr('for', 'ID' + newId + 'Description');
+        newElem.find('.Description').attr('id', 'ID' + newId + 'Description').val('').attr('name', 'ProductFeatures[' + newIda + '].Description').val('');
         $('#entryTripExp' + num).after(newElem);
         $('#entryTripExp' + newNum).focus();
 
@@ -77,8 +77,8 @@
         table.find("tr:gt(0)").each(function (i, row) {
             $(row).find("td:first").html(i + 1);
             var id = i + 1;
-            $(row).find('.Amount').attr('name', 'ExpInfo[' + id + '].Amount');
-            $(row).find('.Remarks').attr('name', 'ExpInfo[' + id + '].Remarks');
+            $(row).find('.Description').attr('name', 'ProductFeatures[' + id + '].Description');
+            $(row).find('.Name').attr('name', 'ProductFeatures[' + id + '].Name');
             $(row).attr('id', 'entryTripExp' + id);
 
             $(row).find('input, select').each(function (j, input) {
@@ -130,7 +130,7 @@
             </div>
 
                 <div  class="form-row"> 
-                    <div class="panel-body">
+                    <div class="panel-body w-100">
                         <div class="col-md-12 searched-content">
 
                             <div class="row">
@@ -164,14 +164,13 @@
                                         }
 
                                         <tr class="clonedInputTripExp" id="entryTripExp@{@x}">
-
-                                            <td class="Sl col-sm-1">1</td>
-                                            <td class="col-sm-3">
-                                                @Html.TextBox("ExpInfo[0].Remarks", null, htmlAttributes: new { @class = "form-control input-sm Remarks" })
+                                            <td>1</td>
+                                            <td>
+                                                @Html.TextBox("ProductFeatures[0].Name", null, htmlAttributes: new { @class = "form-control input-sm Name" })
                                             </td>
 
-                                            <td class="col-sm-4">
-                                                @Html.TextBox("ExpInfo[0].Amount", null, htmlAttributes: new { @class = "form-control input-sm Amount", @required = "required", @onchange = "getTotal()" })
+                                            <td>
+                                                @Html.TextBox("ProductFeatures[0].Description", null, htmlAttributes: new { @class = "form-control input-sm Description", @required = "required", @onchange = "getTotal()" })
                                             </td>
 
                                             <td class="text-center">
@@ -180,7 +179,6 @@
                                                     <button type="button">X</button>
                                                 </a>
                                             </td>
-
                                         </tr>
 
                                     </tbody>
