@@ -5,27 +5,97 @@
 
 @section styles
 {
-
+    <style>
+        .ui-autocomplete-loading {
+            background: #fff no-repeat 95%;
+            background-image: url('../../Content/assets/images/ui-anim.gif');
+        }
+    </style>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
 }
 
 @section scripts
 {
+    <script src="~/lib/jquery/jquery.js"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
     <script>
         @*START Jquery Add row for product Feature*@
-        $(document).ready(function(){
-              var i=1;
-              $('#add').click(function(){
-                   i++;
-                   $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="ProductFeatures[0].Name" placeholder="Product Name" class="form-control name_list" /></td><td><textarea name = "ProductFeatures[0].Description" rows="4" cols="40"></textarea></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
-              });
-              $(document).on('click', '.btn_remove', function(){
-                   var button_id = $(this).attr("id");
-                   $('#row'+button_id+'').remove();
-              });
-       });
+
+        $('#btnAddTripExp').on('click', function () {
+
+        var num = $('.clonedInputTripExp').length,
+
+            newNum = new Number(num + 1),
+            newRow = new Number(num),
+            newElem = $('#entryTripExp' + num).clone().attr('id', 'entryTripExp' + newNum).fadeIn('slow');
+
+        var newIda = $('#entryTripExp' + num).find('.Sl').html(),
+            newId = parseInt(newIda) + 1;
+        newElem.find('.Remarks').parent().attr('for', 'ID' + newId + 'Remarks');
+        newElem.find('.Remarks').attr('id', 'ID' + newId + 'Remarks').val('').attr('name', 'ExpInfo[' + newIda + '].Remarks').val('');
+
+        newElem.find('.Amount').parent().attr('for', 'ID' + newId + 'Amount');
+        newElem.find('.Amount').attr('id', 'ID' + newId + 'Amount').val('').attr('name', 'ExpInfo[' + newIda + '].Amount').val('');
+        $('#entryTripExp' + num).after(newElem);
+        $('#entryTripExp' + newNum).focus();
+
+        $('#btnDelTripExp').attr('disabled', false);
+
+        newElem.find('.Sl').html(newNum);
+    });
+
+
+    $(document).on('click', '.btnDelTripExp', function () {
+
+        event.preventDefault();
+
+        var num = $('.clonedInputTripExp').length,
+
+            newNum = new Number(num);
+
+        if (newNum == 1) {
+            $('.btnDelTripExp').attr('disabled', true);
+            alert("Minimum fill one row!!");
+        }
+        else {
+            var tr = $(this).closest('tr');
+            tr.addClass("bg-danger");
+            tr.fadeOut(500, function () {
+                var table = tr.closest('table');
+                tr.remove();
+                updateIndexesExp(table);
+            });
+        }
+
+    });
+        // Update Clond Input fields Indexes
+    function updateIndexesExp(table) {
+
+        table.find("tr:gt(0)").each(function (i, row) {
+            $(row).find("td:first").html(i + 1);
+            var id = i + 1;
+            $(row).find('.Amount').attr('name', 'ExpInfo[' + id + '].Amount');
+            $(row).find('.Remarks').attr('name', 'ExpInfo[' + id + '].Remarks');
+            $(row).attr('id', 'entryTripExp' + id);
+
+            $(row).find('input, select').each(function (j, input) {
+
+                var id = input.name.match(/\d+/);
+                if (id != null && id.length && id.length == 1) {
+                    var attr = $(input).attr("name");
+                    var newName = attr.replace(attr.match(/\d+/), i);
+                    $(input).attr("name", newName);
+                }
+            });
+
+
+        });
+    }
+
+
         @* END Jquery Add row for product Feature*@
 
     </script>
@@ -43,7 +113,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label asp-for="Description" class="control-label">Description</label>
-                    <textarea name ="Description" class="form-control" rows="3"></textarea>
+                    <textarea name="Description" class="form-control" rows="3"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
@@ -57,15 +127,84 @@
                     <span asp-validation-for="Categories" class="text-danger"></span>
                 </div>
                 @*  Start Jquery For Product Feature Add  *@
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dynamic_field">
-                        <tr>
-                            <td><input type="text" name="ProductFeatures[0].Name" placeholder="Product Name" class="form-control name_list" /></td>
-                            <td><textarea name="ProductFeatures[0].Description" rows="4" cols="40"></textarea></td>
-                            <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
-                        </tr>
-                    </table>
+            </div>
+
+                <div  class="form-row"> 
+                    <div class="panel-body">
+                        <div class="col-md-12 searched-content">
+
+                            <div class="row">
+                                <div class="col-md-5 pl-xs">
+                                    <h4 class="p-none" style="color: #c13832; font-weight: bold">Add Product Features</h4>
+                                </div>
+
+                                <div class="col-md-5 pull-right">
+                                    <button class="btn btn-primary input-sm pull-right " type="button" name="btnAddTripExp" id="btnAddTripExp">
+                                        Add <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+                                <table class="table table-bordered table-striped table-condensed mb-none" id="tblExpenseCount">
+                                    <thead>
+                                        <tr>
+                                            <th>#SL</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @{
+                                            int x = 1;
+                                        }
+
+                                        <tr class="clonedInputTripExp" id="entryTripExp@{@x}">
+
+                                            <td class="Sl col-sm-1">1</td>
+                                            <td class="col-sm-3">
+                                                @Html.TextBox("ExpInfo[0].Remarks", null, htmlAttributes: new { @class = "form-control input-sm Remarks" })
+                                            </td>
+
+                                            <td class="col-sm-4">
+                                                @Html.TextBox("ExpInfo[0].Amount", null, htmlAttributes: new { @class = "form-control input-sm Amount", @required = "required", @onchange = "getTotal()" })
+                                            </td>
+
+                                            <td class="text-center">
+                                                <a href="javascript:void(0)" class="btnDelTripExp" style="cursor: pointer;">
+                                                    @*<i class="fa fa-times tip pointer"></i>*@
+                                                    <button type="button">X</button>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                  
+
+
+
+
+
+                    <div class="col-md-6 pull-right">
+
+                        <button class="btn btn-success pull-right" type="submit" name="btnSubmit">
+                            Submit <i class="fa fa-arrow-circle-right"></i>
+                        </button>
+
+                        <button class="btn btn-danger pull-right mr-sm" name="btnReset" id="statusReset">
+                            Reset <i class="fa fa-refresh"></i>
+                        </button>
+                    </div>
                 </div>
+
                 @* END Jquery For Product Feature Add  *@
             </div>
         </div>
