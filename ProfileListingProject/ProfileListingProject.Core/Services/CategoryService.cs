@@ -60,5 +60,10 @@ namespace ProfileListingProject.Core.Services
         {
             return _storeUnitOfWork.CategoryRepository.GetById(id);
         }
+
+        public Category GetCategoryByName(string name)
+        {
+            return _storeUnitOfWork.CategoryRepository.GetCategoryByName(name);
+        }
     }
 }

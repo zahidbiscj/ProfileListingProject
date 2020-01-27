@@ -17,6 +17,7 @@ namespace ProfileListingProject.Core.Services.Interface
         Product GetProduct(int id);
         void EditProduct(Product product);
         void DeleteProduct(int id);
+        Product GetProductByName(string name);
 
     }
 }

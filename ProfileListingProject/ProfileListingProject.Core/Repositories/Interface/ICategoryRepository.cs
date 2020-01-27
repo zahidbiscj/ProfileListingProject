@@ -8,5 +8,6 @@ namespace ProfileListingProject.Core.Repositories
 {
     public interface ICategoryRepository : IRepository<Category>
     {
+        Category GetCategoryByName(string name);
     }
 }

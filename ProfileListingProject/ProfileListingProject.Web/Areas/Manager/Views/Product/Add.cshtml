@@ -124,13 +124,12 @@
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label asp-for="Categories" class="control-label">Categories</label>
-                    <select name="Categories" class="form-control form-control-sm select2" style="width: 100%;">
+                    <label asp-for="Category.Name" class="control-label">Categories</label>
+                    <select name="Category.Name" class="form-control form-control-sm select2" style="width: 100%;">
                         <option>Please select one</option>
                         <option value="ECommerce">ECommerce</option>
                         <option value="Software Development">Software Development</option>
                     </select>
-                    <span asp-validation-for="Categories" class="text-danger"></span>
                 </div>
             </div>
             @*  Start Jquery For Product Feature Add  *@

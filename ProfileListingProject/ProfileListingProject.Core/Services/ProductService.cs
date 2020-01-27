@@ -16,7 +16,14 @@ namespace ProfileListingProject.Core.Services
         }
         public void AddNewProduct(Product product)
         {
-            _storeUnitOfWork.ProductRepository.Add(product);
+            _storeUnitOfWork.ProductRepository.Add(new Product
+            {
+                Name = product.Name,
+                Description = product.Description,
+                Categories = product.Categories,
+                ProductFeatures = product.ProductFeatures
+
+            });
             _storeUnitOfWork.Save();
         }
 
@@ -33,6 +40,11 @@ namespace ProfileListingProject.Core.Services
         public Product GetProduct(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public Product GetProductByName(string name)
+        {
+            return _storeUnitOfWork.ProductRepository.GetProductByName(name);
         }
 
         public IEnumerable<Product> GetProducts(int pageIndex,
