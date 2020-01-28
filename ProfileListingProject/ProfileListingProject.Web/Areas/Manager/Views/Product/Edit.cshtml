@@ -23,7 +23,7 @@
                 <div class="form-group col-md-6">
                     <label asp-for="Description" class="control-label">Description</label>
                     @*<input value="@Model.Description" name="Description" asp-for="Description" class="form-control form-control-sm" />*@
-                    @Html.TextArea("Description", null, new {@rows = "4",@cols = "50"})
+                    @Html.TextArea("Description", null, new { @rows = "4", @cols = "50" })
                     @*<textarea value ="@Model.Description" name="Description" asp-for="Description" class="form-control" rows="3"></textarea>*@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
@@ -45,22 +45,22 @@
 
                 </div>
             </div>
-           
 
-                <div class="col-md-6 pull-right">
 
-                    <button class="btn btn-success pull-right" type="submit" name="btnSubmit">
-                        Submit <i class="fa fa-arrow-circle-right"></i>
-                    </button>
+            <div class="col-md-6 pull-right">
 
-                    <button class="btn btn-danger pull-right mr-sm" name="btnReset" id="statusReset">
-                        Reset <i class="fa fa-refresh"></i>
-                    </button>
-                </div>
+                <button class="btn btn-success pull-right" type="submit" name="btnSubmit">
+                    Submit <i class="fa fa-arrow-circle-right"></i>
+                </button>
+
+                <button class="btn btn-danger pull-right mr-sm" name="btnReset" id="statusReset">
+                    Reset <i class="fa fa-refresh"></i>
+                </button>
             </div>
-
         </div>
-   
+
+    </div>
+
 
     <div class="card-footer">
         <div class="float-left">
@@ -81,6 +81,7 @@
 @section styles
 {
     <style>
+
         .ui-autocomplete-loading {
             background: #fff no-repeat 95%;
             background-image: url('../../Content/assets/images/ui-anim.gif');

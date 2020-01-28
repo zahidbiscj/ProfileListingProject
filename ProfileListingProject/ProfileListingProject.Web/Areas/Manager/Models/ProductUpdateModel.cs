@@ -26,7 +26,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             _productService = Startup.AutoFacContainer.Resolve<IProductService>();
             _categoryService = Startup.AutoFacContainer.Resolve<ICategoryService>();
         }
-        public ProductUpdateModel(IProductService productService,ICategoryService categoryService)
+        public ProductUpdateModel(IProductService productService, ICategoryService categoryService)
         {
             _productService = productService;
             _categoryService = categoryService;
@@ -68,12 +68,12 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
                     ProductFeatures = this.ProductFeatures,
                     ImageUrl = uniqueFilePath,
                     Categories = new List<ProductCategory>() {
-                            new ProductCategory{ 
+                            new ProductCategory{
                                 CategoryId = category.Id,
                                 ProductId = product.Id
                             }
                     }
-                    
+
                 });
                 Notification = new NotificationModel("Success!", "Product Successfully Created", NotificationType.Success);
             }
@@ -97,7 +97,6 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
         {
             try
             {
-                var category = _categoryService.GetCategoryByName(this.Category.Name);
                 var product = _productService.GetProduct(this.Id);
 
                 _productService.EditProduct(new Product
@@ -132,14 +131,12 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             var productCategory = _productService.GetProductCategory(id);
             var category = _categoryService.GetCategory(productCategory.CategoryId);
 
-            if(product != null)
+            if (product != null)
             {
                 Id = product.Id;
                 Name = product.Name;
                 Description = product.Description;
-                Category = new Category {
-                    Name = category.Name
-                };
+                Category = new Category { Id = category.Id, Name = category.Name };
             }
         }
 

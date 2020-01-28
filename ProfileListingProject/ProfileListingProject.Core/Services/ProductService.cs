@@ -15,7 +15,7 @@ namespace ProfileListingProject.Core.Services
             _storeUnitOfWork = storeUnitOfWork;
         }
         public void AddNewProduct(Product product)
-        { 
+        {
             _storeUnitOfWork.ProductRepository.Add(new Product
             {
                 Name = product.Name,
@@ -44,7 +44,6 @@ namespace ProfileListingProject.Core.Services
             var oldProduct = _storeUnitOfWork.ProductRepository.GetById(product.Id);
             oldProduct.Name = product.Name;
             oldProduct.Description = product.Description;
-            oldProduct.Categories = product.Categories;
             oldProduct.ImageUrl = product.ImageUrl;
             _storeUnitOfWork.Save();
         }

@@ -29,11 +29,10 @@ namespace ProfileListingProject.Core.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-           
-            builder.Entity<Product>()
-                .HasMany(x => x.ProductFeatures);
             builder.Entity<Product>()
                 .HasMany(x => x.PricingModels);
+            builder.Entity<Product>()
+                .HasMany(x => x.ProductFeatures);
 
             ///Electronics -> Mobile -> samsung -> samsung galaxy 
             builder.Entity<ProductCategory>()

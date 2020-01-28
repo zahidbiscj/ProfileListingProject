@@ -42,7 +42,6 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
                 if (model.Image != null)
                 {
                     model.GetUploadedImage(model.Image.FileName);
-                    
                 }
                 model.AddNewProduct(path);
             }
@@ -65,7 +64,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
             {
                 model.EditProduct();
             }
-            return View(model);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

@@ -19,7 +19,7 @@ namespace ProfileListingProject.Core.Repositories
         }
         public ProductCategory GetProductCategoryByProductId(int productId)
         {
-            return _context.ProductCategories.Where(x=> x.ProductId == productId).FirstOrDefault();
+            return _context.ProductCategories.Where(x => x.ProductId == productId).FirstOrDefault();
         }
     }
 }

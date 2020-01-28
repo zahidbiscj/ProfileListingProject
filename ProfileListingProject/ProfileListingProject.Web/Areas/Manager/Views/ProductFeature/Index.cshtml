@@ -27,22 +27,6 @@
                         "render": function (data, type, row) {
                             return `<input type='checkbox' value='${data}'/>`;
                         }
-                    },
-                    {
-                        "orderable": false,
-                        "targets": 3,
-                        "render": function (data, type, row) {
-                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/Manager/ProductFeature/Edit/${data}'" value='${data}'>
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </button>
-                                    <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </button>`;
-                        }
                     }
                 ]
             });
