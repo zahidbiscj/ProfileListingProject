@@ -15,36 +15,53 @@ namespace ProfileListingProject.Core.Services
             _storeUnitOfWork = storeUnitOfWork;
         }
         public void AddNewProduct(Product product)
-        {
+        { 
             _storeUnitOfWork.ProductRepository.Add(new Product
             {
                 Name = product.Name,
                 Description = product.Description,
                 Categories = product.Categories,
+                ImageUrl = product.ImageUrl,
                 ProductFeatures = product.ProductFeatures
-
             });
             _storeUnitOfWork.Save();
         }
 
         public void DeleteProduct(int id)
         {
-            throw new NotImplementedException();
+            var product = _storeUnitOfWork.ProductRepository.GetProductByIdWithChild(id);
+            foreach (var productFeature in product.ProductFeatures)
+            {
+                _storeUnitOfWork.ProductFeatureRepository.Remove(productFeature);
+            }
+            _storeUnitOfWork.ProductRepository.Remove(id);
+
+            _storeUnitOfWork.Save();
         }
 
         public void EditProduct(Product product)
         {
-            throw new NotImplementedException();
+            var oldProduct = _storeUnitOfWork.ProductRepository.GetById(product.Id);
+            oldProduct.Name = product.Name;
+            oldProduct.Description = product.Description;
+            oldProduct.Categories = product.Categories;
+            oldProduct.ImageUrl = product.ImageUrl;
+            _storeUnitOfWork.Save();
         }
 
         public Product GetProduct(int id)
         {
-            throw new NotImplementedException();
+            return _storeUnitOfWork.ProductRepository.GetById(id);
         }
 
         public Product GetProductByName(string name)
         {
             return _storeUnitOfWork.ProductRepository.GetProductByName(name);
+        }
+
+        public ProductCategory GetProductCategory(int productId)
+        {
+            return _storeUnitOfWork.ProductCategoryRepository.GetProductCategoryByProductId(productId);
         }
 
         public IEnumerable<Product> GetProducts(int pageIndex,

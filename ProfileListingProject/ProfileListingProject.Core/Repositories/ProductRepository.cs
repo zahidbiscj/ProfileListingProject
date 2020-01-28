@@ -1,4 +1,5 @@
-﻿using ProfileListingProject.Core.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using ProfileListingProject.Core.Contexts;
 using ProfileListingProject.Core.Entities;
 using ProfileListingProject.Core.Repositories.Interface;
 using ProfileListingProject.Data;
@@ -16,6 +17,14 @@ namespace ProfileListingProject.Core.Repositories
             : base((StoreContext)storeContext)
         {
             _storeContext = storeContext;
+        }
+
+        public Product GetProductByIdWithChild(int id)
+        {
+            return _storeContext.Products.Where(x => x.Id == id)
+                .Include(nameof(Product.Categories))
+                .Include(nameof(Product.ProductFeatures))
+                .FirstOrDefault();
         }
 
         public Product GetProductByName(string name)

@@ -40,13 +40,19 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
                 data = (from record in records
                         select new string[]
                         {
-                                record.Id.ToString(),
-                                record.Name,
-                                record.Description
+                            record.Id.ToString(),
+                            record.Name,
+                            record.Description,
+                            record.Id.ToString()
                         }
                     ).ToArray()
 
             };
+        }
+
+        public void Delete(int id)
+        {
+            _productService.DeleteProduct(id);
         }
     }
 }

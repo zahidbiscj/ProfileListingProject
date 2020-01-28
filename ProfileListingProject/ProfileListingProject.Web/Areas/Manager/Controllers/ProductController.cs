@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using ProfileListingProject.Web.Areas.Manager.Models;
 using ProfileListingProject.Web.Models;
@@ -34,11 +36,45 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Add(ProductUpdateModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                model.AddNewProduct();
+                string path = null;
+                if (model.Image != null)
+                {
+                    model.GetUploadedImage(model.Image.FileName);
+                    
+                }
+                model.AddNewProduct(path);
+            }
+
+            return View(model);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var model = new ProductUpdateModel();
+            model.Load(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ProductUpdateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.EditProduct();
             }
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            var model = new ProductViewModel();
+            model.Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }

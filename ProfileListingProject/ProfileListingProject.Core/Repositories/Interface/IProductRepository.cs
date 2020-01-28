@@ -9,5 +9,6 @@ namespace ProfileListingProject.Core.Repositories.Interface
     public interface IProductRepository : IRepository<Product>
     {
         Product GetProductByName(string name);
+        Product GetProductByIdWithChild(int id);
     }
 }

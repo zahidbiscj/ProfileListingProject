@@ -13,6 +13,7 @@ namespace ProfileListingProject.Core.UnitOfWorks
         public ICategoryRepository CategoryRepository { get; set; }
         public IProductFeatureRepository ProductFeatureRepository { get; set; }
         public IProductRepository ProductRepository { get; set; }
+        public IProductCategoryRepository ProductCategoryRepository { get; set; }
 
         public StoreUnitOfWork(string connectionString, string migrationAssemblyName)
             : base(connectionString, migrationAssemblyName)
@@ -20,6 +21,7 @@ namespace ProfileListingProject.Core.UnitOfWorks
             CategoryRepository = new CategoryRepository(_dbContext);
             ProductFeatureRepository = new ProductFeatureRepository(_dbContext);
             ProductRepository = new ProductRepository(_dbContext);
+            ProductCategoryRepository = new ProductCategoryRepository(_dbContext);
         }
     }
 }

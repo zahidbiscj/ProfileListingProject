@@ -18,6 +18,6 @@ namespace ProfileListingProject.Core.Services.Interface
         void EditProduct(Product product);
         void DeleteProduct(int id);
         Product GetProductByName(string name);
-
+        ProductCategory GetProductCategory(int productId);
     }
 }

@@ -1,0 +1,99 @@
+﻿@model ProfileListingProject.Web.Areas.Manager.Models.ProductUpdateModel
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+@section notification
+{
+    @await Html.PartialAsync("_Notification", Model.Notification)
+}
+
+<form enctype="multipart/form-data" asp-controller="Product" asp-action="Edit" method="post" class="form-horizontal">
+    @Html.AntiForgeryToken()
+    <input type="hidden" value="@Model.Id" name="Id" />
+
+    <div class="card card-secondary">
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="Name" class="control-label">Product Name</label>
+                    <input value="@Model.Name" name="Name" asp-for="Name" class="form-control form-control-sm" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Description" class="control-label">Description</label>
+                    @*<input value="@Model.Description" name="Description" asp-for="Description" class="form-control form-control-sm" />*@
+                    @Html.TextArea("Description", null, new {@rows = "4",@cols = "50"})
+                    @*<textarea value ="@Model.Description" name="Description" asp-for="Description" class="form-control" rows="3"></textarea>*@
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                @*  asp-for tag helper is set to "Photo" property. "Photo" property type is IFormFile
+                    so at runtime asp.net core generates file upload control (input type=file)
+                *@
+                <div class="form-group row">
+                    <dl>
+                        <dd>
+                            <input value="@Model.Image" name="Image" type="file">
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label asp-for="Category.Name" class="control-label">Categories</label>
+                    <input name="Category.Name" value="@Model.Category.Name" class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled>
+
+                </div>
+            </div>
+           
+
+                <div class="col-md-6 pull-right">
+
+                    <button class="btn btn-success pull-right" type="submit" name="btnSubmit">
+                        Submit <i class="fa fa-arrow-circle-right"></i>
+                    </button>
+
+                    <button class="btn btn-danger pull-right mr-sm" name="btnReset" id="statusReset">
+                        Reset <i class="fa fa-refresh"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+   
+
+    <div class="card-footer">
+        <div class="float-left">
+            <button type="submit" class="btn btn-info pull-left">Submit</button>
+        </div>
+        <div class="float-right">
+            <a asp-area="Manager" asp-controller="Product" asp-action="Index" class="btn btn-outline-info pull-right">Back To List</a>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+@section styles
+{
+    <style>
+        .ui-autocomplete-loading {
+            background: #fff no-repeat 95%;
+            background-image: url('../../Content/assets/images/ui-anim.gif');
+        }
+    </style>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script src="~/lib/jquery/jquery.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+}
