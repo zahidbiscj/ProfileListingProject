@@ -26,6 +26,12 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             _productService = Startup.AutoFacContainer.Resolve<IProductService>();
             _categoryService = Startup.AutoFacContainer.Resolve<ICategoryService>();
         }
+
+        public IEnumerable<Category> GetAllCategoryList()
+        {
+            return _categoryService.GetAllCategories();
+        }
+
         public ProductUpdateModel(IProductService productService, ICategoryService categoryService)
         {
             _productService = productService;

@@ -20,8 +20,8 @@
 {
     <script src="~/lib/jquery/jquery.js"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>*@
 
     <script>
         @*START Jquery Add row for product Feature*@
@@ -125,7 +125,7 @@
                 </div>
 
                 @*  asp-for tag helper is set to "Photo" property. "Photo" property type is IFormFile
-                    so at runtime asp.net core generates file upload control (input type=file)
+        so at runtime asp.net core generates file upload control (input type=file)
                 *@
                 <div class="form-group row">
                     <dl>
@@ -135,12 +135,14 @@
                     </dl>
                 </div>
 
-                <div class="form-group col-md-4">
+               <div class="form-group col-md-4">
                     <label asp-for="Category.Name" class="control-label">Categories</label>
                     <select name="Category.Name" class="form-control form-control-sm select2" style="width: 100%;">
-                        <option>Please select one</option>
-                        <option value="ECommerce">ECommerce</option>
-                        <option value="Software Development">Software Development</option>
+                        <option disabled selected> Please Select a new Item </option>
+                        @foreach (var item in ViewBag.CategoryList)
+                        {
+                            <option value="@item.Name">@item.Name</option>
+                        }
                     </select>
                 </div>
             </div>

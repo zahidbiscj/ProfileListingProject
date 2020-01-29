@@ -19,5 +19,6 @@ namespace ProfileListingProject.Core.Services.Interface
         void DeleteCategory(int id);
 
         Category GetCategoryByName(string name);
+        IEnumerable<Category> GetAllCategories();
     }
 }

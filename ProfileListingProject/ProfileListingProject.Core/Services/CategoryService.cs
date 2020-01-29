@@ -38,6 +38,11 @@ namespace ProfileListingProject.Core.Services
             _storeUnitOfWork.Save();
         }
 
+        public IEnumerable<Category> GetAllCategories()
+        {
+            return _storeUnitOfWork.CategoryRepository.GetAllCategoryList();
+        }
+
         public IEnumerable<Category> GetCategories(
             int pageIndex,
             int pageSize,

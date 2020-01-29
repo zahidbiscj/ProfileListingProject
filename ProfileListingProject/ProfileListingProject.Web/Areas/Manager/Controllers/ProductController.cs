@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProfileListingProject.Web.Areas.Manager.Models;
 using ProfileListingProject.Web.Models;
 
@@ -30,6 +31,8 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         public IActionResult Add()
         {
             var model = new ProductUpdateModel();
+            var categories = model.GetAllCategoryList();
+            ViewBag.CategoryList = categories;
             return View(model);
         }
         [HttpPost]

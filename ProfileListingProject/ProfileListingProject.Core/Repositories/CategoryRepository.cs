@@ -18,6 +18,11 @@ namespace ProfileListingProject.Core.Repositories
             _context = dbContext;
         }
 
+        public IEnumerable<Category> GetAllCategoryList()
+        {
+            return _context.Categories.ToList();
+        }
+
         public Category GetCategoryByName(string name)
         {
             return _context.Categories.Where(x => x.Name == name).FirstOrDefault();
