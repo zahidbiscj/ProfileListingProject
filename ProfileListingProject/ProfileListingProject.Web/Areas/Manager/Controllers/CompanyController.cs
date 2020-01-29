@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ProfileListingProject.Web.Areas.Manager.Controllers
 {
+    [Area("Manager")]
     public class CompanyController : Controller
     {
         public IActionResult Index()
