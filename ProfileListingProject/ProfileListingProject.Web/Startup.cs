@@ -50,6 +50,9 @@ namespace ProfileListingProject.Web
             services.AddDbContext<StoreContext>(x => 
                 x.UseSqlServer(connectionString, m => m.MigrationsAssembly(migrationAssemblyName)));
 
+            services.AddDbContext<OfficeContext>(x => 
+                x.UseSqlServer(connectionString, m => m.MigrationsAssembly(migrationAssemblyName)));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

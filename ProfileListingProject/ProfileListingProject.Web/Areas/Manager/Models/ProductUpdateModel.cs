@@ -42,11 +42,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
         {
             var randomName = Path.GetRandomFileName().Replace(".", "");
             var fileName = System.IO.Path.GetFileName(imageFileName);
-            var newFileName = $"{ randomName }{ Path.GetExtension(imageFileName)}";
+            var path = $"{ randomName }{ Path.GetExtension(imageFileName)}";
 
-            var path = $"wwwroot/images/{randomName}{Path.GetExtension(imageFileName)}";
+            //var path = $"wwwroot/images/{randomName}{Path.GetExtension(imageFileName)}";
 
-            if (!System.IO.File.Exists(path))
+            /*if (!System.IO.File.Exists(path))
             {
                 using (var imageFile = System.IO.File.OpenWrite(path))
                 {
@@ -56,7 +56,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
 
                     }
                 }
-            }
+            }*/
             return path;
         }
 
@@ -65,18 +65,15 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             try
             {
                 var category = _categoryService.GetCategoryByName(this.Category.Name);
-                var product = _productService.GetProductByName(this.Name);
                 _productService.AddNewProduct(new Product
                 {
-                    Id = product.Id,
                     Name = this.Name,
                     Description = this.Description,
                     ProductFeatures = this.ProductFeatures,
                     ImageUrl = uniqueFilePath,
                     Categories = new List<ProductCategory>() {
                             new ProductCategory{
-                                CategoryId = category.Id,
-                                ProductId = product.Id
+                                CategoryId = category.Id
                             }
                     }
 

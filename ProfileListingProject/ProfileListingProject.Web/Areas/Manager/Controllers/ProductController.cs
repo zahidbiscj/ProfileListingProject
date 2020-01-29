@@ -44,11 +44,12 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
                 string path = null;
                 if (model.Image != null)
                 {
-                    model.GetUploadedImage(model.Image.FileName);
+                    path = model.GetUploadedImage(model.Image.FileName);
                 }
                 model.AddNewProduct(path);
             }
-
+            var categories = model.GetAllCategoryList();
+            ViewBag.CategoryList = categories;
             return View(model);
         }
 
