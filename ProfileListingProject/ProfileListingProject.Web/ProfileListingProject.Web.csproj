@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Manager\Data\" />
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 

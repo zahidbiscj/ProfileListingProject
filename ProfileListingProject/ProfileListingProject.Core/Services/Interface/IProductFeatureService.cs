@@ -12,5 +12,11 @@ namespace ProfileListingProject.Core.Services.Interface
             string searchText,
             out int total,
             out int totalFiltered);
+
+        ProductFeature GetProductFeature(int id);
+        void EditProductFeature(ProductFeature productFeature);
+        void DeleteProductFeature(int id);
+
+        ProductFeature GetProductFeatureByName(string name);
     }
 }

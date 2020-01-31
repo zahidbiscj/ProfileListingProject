@@ -14,6 +14,21 @@ namespace ProfileListingProject.Core.Services
         {
             _storeUnitOfWork = storeUnitOfWork;
         }
+
+        public void DeleteProductFeature(int id)
+        {
+            _storeUnitOfWork.ProductFeatureRepository.Remove(id);
+            _storeUnitOfWork.Save();
+        }
+
+        public void EditProductFeature(ProductFeature productFeature)
+        {
+            var oldProductFeature = _storeUnitOfWork.ProductFeatureRepository.GetById(productFeature.Id);
+            oldProductFeature.Name = productFeature.Name;
+            oldProductFeature.Description = productFeature.Description;
+            _storeUnitOfWork.Save();
+        }
+
         public IEnumerable<ProductFeature> GetFeatures(int pageIndex,
             int pageSize,
             string searchText,
@@ -29,6 +44,16 @@ namespace ProfileListingProject.Core.Services
                 pageIndex,
                 pageSize,
                 true);
+        }
+
+        public ProductFeature GetProductFeature(int id)
+        {
+            return _storeUnitOfWork.ProductFeatureRepository.GetById(id);
+        }
+
+        public ProductFeature GetProductFeatureByName(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

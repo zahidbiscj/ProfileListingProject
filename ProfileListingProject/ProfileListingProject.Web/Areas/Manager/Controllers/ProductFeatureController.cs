@@ -32,6 +32,33 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
             
         }
 
+        public IActionResult Edit(int id)
+        {
+            var model = new ProductFeatureUpdateModel();
+            model.Load(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ProductFeatureUpdateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.EditProductFeature();
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            var model = new ProductFeatureViewModel();
+            model.Delete(id);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Add()
         {
             var model = new ProductFeatureUpdateModel();

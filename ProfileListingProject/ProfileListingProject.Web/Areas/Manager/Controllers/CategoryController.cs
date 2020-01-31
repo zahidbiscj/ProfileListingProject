@@ -69,7 +69,6 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
             model.Delete(id);
             return RedirectToAction("Index");
         }
-
-       
+    
     }
 }

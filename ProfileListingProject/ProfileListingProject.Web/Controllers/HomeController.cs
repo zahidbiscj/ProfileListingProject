@@ -20,7 +20,7 @@ namespace ProfileListingProject.Web.Controllers
         public IActionResult Index()
         {
             var companies = _officeManagementService.GetAllCompanies();
-            //var a = companies.Reverse();
+            ViewBag.NewMembers = companies.Reverse();
             ViewBag.Companies = companies;
             return View();
         }
