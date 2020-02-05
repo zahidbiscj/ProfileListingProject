@@ -3,7 +3,9 @@ using ProfileListingProject.Core.Services.Interface;
 using ProfileListingProject.Core.UnitOfWorks;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ProfileListingProject.Core.Services
 {
@@ -17,7 +19,15 @@ namespace ProfileListingProject.Core.Services
 
         public void AddNewCompany(Company company)
         {
-            throw new NotImplementedException();
+            _officeUnitOfWork.CompanyRepository.Add(new Company
+            {
+                Name = company.Name,
+                ShortDescription = company.ShortDescription,
+                Address = company.Address,
+                LogoImageUrl = company.LogoImageUrl,
+                Phone = company.Phone
+            });
+            _officeUnitOfWork.Save();
         }
 
         public void DeleteCompany(int id)
@@ -49,5 +59,7 @@ namespace ProfileListingProject.Core.Services
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

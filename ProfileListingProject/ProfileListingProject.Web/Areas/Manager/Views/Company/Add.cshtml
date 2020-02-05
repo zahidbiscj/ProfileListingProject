@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Add Company";
+}
+
+@*<form enctype="multipart/form-data" method="post">
+    <dl>
+        <dd>
+            <input name="ProfileImage" type="file">
+        </dd>
+    </dl>
+    <input class="btn btn-primary" type="submit" value="Upload" />
+</form>*@
+
+
+<section class="content">
+    <div class="container-fluid">
+        <form enctype="multipart/form-data" method="post" asp-controller="Company" asp-action="Add">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements disabled -->
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Add your Company Profile</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input name="Name" type="text" class="form-control" placeholder="Enter your Name...">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Short Description</label>
+                                        <textarea name="ShortDescription" class="form-control" rows="3" placeholder="Enter Short Description..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input name="Address" type="text" class="form-control" placeholder="Enter your Address...">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input name="Phone" type="number" class="form-control" placeholder="Example - 01891239182...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <dl>
+                                            <dd>
+                                                <input name="ProfileImage" type="file">
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="btn btn-primary" type="submit" value="Submit" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <!--/.col (right) -->
+            </div>
+        </form>
+    </div>
+</section>
