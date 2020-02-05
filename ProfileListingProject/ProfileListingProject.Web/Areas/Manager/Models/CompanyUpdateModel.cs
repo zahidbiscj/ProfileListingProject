@@ -30,6 +30,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
         public string Phone { get; set; }
         public IList<AreaOfOperation> AreaOfOperations { get; set; }
         public IList<TechnologyInfo> TechnologyInfos { get; set; }
+        public string[] TechnologyList { get; set; }
         public IList<Team> Teams { get; set; }
 
         private IOfficeManagementService _officeService;

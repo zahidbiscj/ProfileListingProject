@@ -10,6 +10,8 @@ using Amazon.SQS;
 using Amazon.SQS.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using ProfileListingProject.Core.Entities;
 using ProfileListingProject.Core.Services.Interface;
 using ProfileListingProject.Web.Areas.Manager.Models;
 
@@ -56,6 +58,9 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         public IActionResult Add()
         {
             var model = new CompanyUpdateModel();
+            var technologyInfos = new List<TechnologyInfo>() { new TechnologyInfo { Name= "alpant" },
+                new TechnologyInfo { Name = "pant"},new TechnologyInfo{ Name = "basha mia"} };
+            model.TechnologyInfos = technologyInfos.Select(x => new TechnologyInfo { Name = x.Name, Id = x.Id }).ToList();
             return View(model);
         }
 
