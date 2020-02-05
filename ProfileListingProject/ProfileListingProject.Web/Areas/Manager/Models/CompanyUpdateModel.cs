@@ -71,9 +71,9 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             return newFileName;
         }
 
-        public async Task InsertImageToS3BucketAsync()
+        public async Task InsertImageToS3BucketAsync(IFormFile imageFile)
         {
-            var newFileName = GetRandomizedNewFileName(this.ProfileImage);
+            var newFileName = GetRandomizedNewFileName(imageFile);
             var path = $"wwwroot/images/{newFileName}";
             WriteFileInSystemDrive(path);
 

@@ -66,7 +66,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         {
             try
             {
-                await model.InsertImageToS3BucketAsync();
+                await model.InsertImageToS3BucketAsync(model.ProfileImage);
                 if (ModelState.IsValid)
                 {
                     model.AddNewCompany();
