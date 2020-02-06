@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ProfileListingProject.Core.UnitOfWorks
 {
-    public class OfficeUnitOfWork : UnitOfWork<OfficeContext>, IOfficeUnitOfWork
+    public class OfficeUnitOfWork : UnitOfWork<StoreContext>, IOfficeUnitOfWork
     {
         public ICompanyRepository CompanyRepository { get; set; }
         public OfficeUnitOfWork(string connectionString, string migrationAssemblyName)

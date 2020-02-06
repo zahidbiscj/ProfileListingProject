@@ -53,16 +53,6 @@ namespace ProfileListingProject.Core
             builder.RegisterType<ProductService>().As<IProductService>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<OfficeContext>()
-                   .WithParameter("connectionString", _connectionString)
-                   .WithParameter("migrationAssemblyName", _migrationAssemblyName)
-                   .InstancePerLifetimeScope();
-
-            builder.RegisterType<OfficeContext>().As<IOfficeContext>()
-                   .WithParameter("connectionString", _connectionString)
-                   .WithParameter("migrationAssemblyName", _migrationAssemblyName)
-                   .InstancePerLifetimeScope();
-
             builder.RegisterType<OfficeManagementService>().As<IOfficeManagementService>()
                 .InstancePerLifetimeScope();
 

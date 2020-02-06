@@ -17,8 +17,8 @@ namespace ProfileListingProject.Core.Entities
         public IList<TechnologyInfo> TechnologyInfos { get; set; }
         public IList<Team> Teams { get; set; }
 
-        //public IList<CompanyService> Services { get; set; }
-        //public IList<Product> Products { get; set; }
-        //public IList<Project> Projects { get; set; }
+        public IList<CompanyService> Services { get; set; }
+        public IList<Product> Products { get; set; }
+        public IList<Project> Projects { get; set; }
     }
 }

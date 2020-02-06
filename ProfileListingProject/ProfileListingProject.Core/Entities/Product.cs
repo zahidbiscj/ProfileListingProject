@@ -13,6 +13,8 @@ namespace ProfileListingProject.Core.Entities
         public IList<ProductCategory> Categories { get; set; }
         public IList<ProductFeature> ProductFeatures { get; set; }
         public IList<PricingModel> PricingModels { get; set; }
+        public int CompanyId { get; set; }
+        public Company Company { get; set; }
 
     }
 }

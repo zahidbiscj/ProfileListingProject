@@ -29,10 +29,38 @@ namespace ProfileListingProject.Core.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+                
             builder.Entity<Product>()
                 .HasMany(x => x.PricingModels);
             builder.Entity<Product>()
                 .HasMany(x => x.ProductFeatures);
+            builder.Entity<Company>()
+                .HasMany(x => x.AreaOfOperations);
+            builder.Entity<Company>()
+                .HasMany(x => x.TechnologyInfos);
+            builder.Entity<Company>()
+                .HasMany(x => x.Teams);
+            builder.Entity<Company>()
+                .HasMany(x => x.Products);
+            builder.Entity<Company>()
+                .HasMany(x => x.Projects);
+            builder.Entity<Company>()
+                .HasMany(x => x.Services);
+
+            builder.Entity<Project>()
+                .HasOne(x => x.Company)
+                .WithMany(x => x.Projects)
+                .HasForeignKey(x => x.CompanyId);
+
+            builder.Entity<CompanyService>()
+                .HasOne(x => x.Company)
+                .WithMany(x => x.Services)
+                .HasForeignKey(x => x.CompanyId);
+
+            builder.Entity<Project>()
+                .HasMany(x => x.DemoAccount)
+                .WithOne(x => x.Project)
+                .HasForeignKey(x => x.ProjectId);
 
             ///Electronics -> Mobile -> samsung -> samsung galaxy 
             builder.Entity<ProductCategory>()
@@ -55,7 +83,13 @@ namespace ProfileListingProject.Core.Contexts
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<PricingModel> PricingModels { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
-        public DbSet<ProductScreenshot> ProductScreenshots { get; set; }
+        public DbSet<CompanyService> CompanyServices { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<AreaOfOperation> AreaOfOperations { get; set; }
+        public DbSet<TechnologyInfo> TechnologyInfos { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<PricingRate> PricingRates { get; set; }
 
     }
 }
