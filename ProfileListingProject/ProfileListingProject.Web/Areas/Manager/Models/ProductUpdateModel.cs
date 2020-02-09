@@ -42,11 +42,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
         {
             var randomName = Path.GetRandomFileName().Replace(".", "");
             var fileName = System.IO.Path.GetFileName(imageFileName);
-            var path = $"{ randomName }{ Path.GetExtension(imageFileName)}";
+            var newpath = $"{ randomName }{ Path.GetExtension(imageFileName)}";
 
-            //var path = $"wwwroot/images/{randomName}{Path.GetExtension(imageFileName)}";
+            var path = $"wwwroot/images/{randomName}{Path.GetExtension(imageFileName)}";
 
-            /*if (!System.IO.File.Exists(path))
+            if (!System.IO.File.Exists(path))
             {
                 using (var imageFile = System.IO.File.OpenWrite(path))
                 {
@@ -56,8 +56,8 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
 
                     }
                 }
-            }*/
-            return path;
+            }
+            return newpath;
         }
 
         public void AddNewProduct(string uniqueFilePath)

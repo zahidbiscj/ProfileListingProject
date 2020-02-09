@@ -1,33 +1,29 @@
-﻿using ProfileListingProject.Core.Services.Interface;
+﻿using Autofac;
+using ProfileListingProject.Core.Services.Interface;
 using ProfileListingProject.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
 
 namespace ProfileListingProject.Web.Areas.Manager.Models
 {
-    public class CategoryViewModel : BaseModel
+    public class CompanyServiceViewModel
     {
-        private ICategoryService _categoryService;
-
-        public CategoryViewModel()
+        private IServiceManagement _serviceManagement;
+        public CompanyServiceViewModel()
         {
-            _categoryService = Startup.AutoFacContainer.Resolve<ICategoryService>();
+            _serviceManagement = Startup.AutoFacContainer.Resolve<IServiceManagement>();
         }
-
-        public CategoryViewModel(ICategoryService categoryService)
+        public CompanyServiceViewModel(IServiceManagement serviceManagement)
         {
-            _categoryService = categoryService;
+            _serviceManagement = serviceManagement;
         }
-
-        public object GetCategories(DataTablesAjaxRequestModel tableModel)
+        public object GetCompanyServices(DataTablesAjaxRequestModel tableModel)
         {
             int total = 0;
             int totalFiltered = 0;
-            var records = _categoryService.GetCategories(
+            var records = _serviceManagement.GetCompanyServices(
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
@@ -48,11 +44,6 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
                     ).ToArray()
 
             };
-        }
-
-        public void Delete(int id)
-        {
-            
         }
     }
 }

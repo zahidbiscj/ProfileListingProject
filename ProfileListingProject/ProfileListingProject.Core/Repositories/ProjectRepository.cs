@@ -8,10 +8,10 @@ using System.Text;
 
 namespace ProfileListingProject.Core.Repositories
 {
-    public class ProductFeatureRepository : Repository<ProductFeature>,IProductFeatureRepository
+    public class ProjectRepository : Repository<Project> , IProjectRepository
     {
-        public ProductFeatureRepository(IStoreContext storeContext)
-            :base((OfficeContext)storeContext)
+        public ProjectRepository(OfficeContext storeContext)
+            : base(storeContext)
         {
 
         }

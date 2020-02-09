@@ -1,33 +1,29 @@
-﻿using ProfileListingProject.Core.Services.Interface;
+﻿using Autofac;
+using ProfileListingProject.Core.Services.Interface;
+using ProfileListingProject.Web.Areas.Manager.Models;
 using ProfileListingProject.Web.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
 
-namespace ProfileListingProject.Web.Areas.Manager.Models
+namespace ProfileListingProject.Web.Areas.Manager.Controllers
 {
-    public class CategoryViewModel : BaseModel
+    public class ProjectViewModel : BaseModel
     {
-        private ICategoryService _categoryService;
-
-        public CategoryViewModel()
+        private IProjectManagementService _projectManagementService;
+        public ProjectViewModel()
         {
-            _categoryService = Startup.AutoFacContainer.Resolve<ICategoryService>();
+            _projectManagementService = Startup.AutoFacContainer.Resolve<IProjectManagementService>();
+        }
+        public ProjectViewModel(IProjectManagementService projectManagementService)
+        {
+            _projectManagementService = projectManagementService;
         }
 
-        public CategoryViewModel(ICategoryService categoryService)
-        {
-            _categoryService = categoryService;
-        }
-
-        public object GetCategories(DataTablesAjaxRequestModel tableModel)
+        public object GetProjects(DataTablesAjaxRequestModel tableModel)
         {
             int total = 0;
             int totalFiltered = 0;
-            var records = _categoryService.GetCategories(
+            var records = _projectManagementService.GetProjects(
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
@@ -43,16 +39,12 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
                         {
                                 record.Id.ToString(),
                                 record.Name,
+                                record.Description,
                                 record.Id.ToString()
                         }
                     ).ToArray()
 
             };
-        }
-
-        public void Delete(int id)
-        {
-            
         }
     }
 }

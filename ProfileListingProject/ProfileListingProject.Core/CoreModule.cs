@@ -25,12 +25,12 @@ namespace ProfileListingProject.Core
         }
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<StoreContext>()
+            builder.RegisterType<OfficeContext>()
                    .WithParameter("connectionString", _connectionString)
                    .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                    .InstancePerLifetimeScope();
 
-            builder.RegisterType<StoreContext>().As<IStoreContext>()
+            builder.RegisterType<OfficeContext>().As<IStoreContext>()
                    .WithParameter("connectionString", _connectionString)
                    .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                    .InstancePerLifetimeScope();
@@ -62,6 +62,16 @@ namespace ProfileListingProject.Core
             builder.RegisterType<OfficeUnitOfWork>().As<IOfficeUnitOfWork>()
                 .WithParameter("connectionString", _connectionString)
                 .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ProjectRepository>().As<IProjectRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<ProjectManagementService>().As<IProjectManagementService>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<CompanyServiceRepository>().As<ICompanyServiceRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<ServiceManagement>().As<IServiceManagement>()
                 .InstancePerLifetimeScope();
 
             base.Load(builder);

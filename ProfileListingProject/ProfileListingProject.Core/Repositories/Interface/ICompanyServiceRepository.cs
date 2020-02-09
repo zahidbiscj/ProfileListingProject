@@ -6,9 +6,8 @@ using System.Text;
 
 namespace ProfileListingProject.Core.Repositories.Interface
 {
-    public interface ICompanyRepository : IRepository<Company>
+    public interface ICompanyServiceRepository : IRepository<CompanyService>
     {
-        IEnumerable<Company> GetAllCompanies();
-        Company GetCompaniesIncludingChild(int id);
+        CompanyService GetServiceWithPricingRate(int id);
     }
 }

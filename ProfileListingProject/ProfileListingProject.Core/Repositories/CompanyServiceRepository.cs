@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProfileListingProject.Core.Contexts;
 using ProfileListingProject.Core.Entities;
+using ProfileListingProject.Core.Repositories.Interface;
 using ProfileListingProject.Data;
 using System;
 using System.Collections.Generic;
@@ -9,23 +10,19 @@ using System.Text;
 
 namespace ProfileListingProject.Core.Repositories
 {
-    public class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class CompanyServiceRepository : Repository<CompanyService>, ICompanyServiceRepository
     {
         private OfficeContext _context;
-        public CategoryRepository(OfficeContext dbContext)
+        public CompanyServiceRepository(OfficeContext dbContext)
             : base(dbContext)
         {
             _context = dbContext;
         }
 
-        public IEnumerable<Category> GetAllCategoryList()
+        public CompanyService GetServiceWithPricingRate(int id)
         {
-            return _context.Categories.ToList();
-        }
-
-        public Category GetCategoryByName(string name)
-        {
-            return _context.Categories.Where(x => x.Name == name).FirstOrDefault();
+            return _context.CompanyServices.Where(x => x.Id == id)
+                .Include(nameof(CompanyService.PricingRate)).FirstOrDefault();
         }
     }
 }

@@ -8,7 +8,7 @@ using ProfileListingProject.Core.Contexts;
 
 namespace ProfileListingProject.Web.Migrations
 {
-    [DbContext(typeof(StoreContext))]
+    [DbContext(typeof(OfficeContext))]
     partial class StoreContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

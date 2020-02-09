@@ -5,7 +5,7 @@
 
 @section styles
 {
-    
+
     <link href="~/css/site.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet" />
 }
@@ -40,7 +40,7 @@
                 }
             });
         });
-         $(document).ready(function () {
+        $(document).ready(function () {
             $("#anotherCarousel").on("slide.bs.carousel", function (e) {
                 var $e = $(e.relatedTarget);
                 var idx = $e.index();
@@ -173,6 +173,7 @@
                             @foreach (var item in ViewBag.Companies)
                             {
                                 <div class="carousel-item col-md-4">
+
                                     <div class="card">
                                         @if (string.IsNullOrEmpty(item.LogoImageUrl))
                                         {
@@ -188,6 +189,7 @@
                                             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                         </div>
                                     </div>
+
                                 </div>
                             }
                             <div class="carousel-item col-md-4">
@@ -262,53 +264,53 @@
 
                 @*Bootstrap Multi card Carousel start*@
 
-            <div class="container-fluid">
-                @*<h1 class="text-center mb-3">Bootstrap Multi-Card Carousel</h1>@**@
-                <div id="anotherCarousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner row w-100 mx-auto">
-                        <div class="carousel-item col-md-4 active">
-                            <div class="card">
-                                <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f44242/fff" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title">Card 1</h4>
-                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        @foreach (var item in ViewBag.NewMembers)
-                        {
-                            <div class="carousel-item col-md-4">
+                <div class="container-fluid">
+                    @*<h1 class="text-center mb-3">Bootstrap Multi-Card Carousel</h1>@**@
+                    <div id="anotherCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner row w-100 mx-auto">
+                            <div class="carousel-item col-md-4 active">
                                 <div class="card">
-                                    @if (string.IsNullOrEmpty(item.LogoImageUrl))
-                                    {
-                                        <img class="card-img-top img-fluid" src="~/images/image-not-found.png" height="800" alt="Card image cap">
-                                    }
-                                    else
-                                    {
-                                        <img class="card-img-top img-fluid" src="~/images/@item.LogoImageUrl" alt="Card image cap">
-                                    }
+                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f44242/fff" alt="Card image cap">
                                     <div class="card-body">
-                                        <h6 class="card-title bold">@item.Name</h6>
-                                        <p class="card-text">@item.ShortDescription</p>
+                                        <h4 class="card-title">Card 1</h4>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                     </div>
                                 </div>
                             </div>
-                        }
 
+                            @foreach (var item in ViewBag.NewMembers)
+                            {
+                                <div class="carousel-item col-md-4">
+                                    <div class="card">
+                                        @if (string.IsNullOrEmpty(item.LogoImageUrl))
+                                        {
+                                            <img class="card-img-top img-fluid" src="~/images/image-not-found.png" height="800" alt="Card image cap">
+                                        }
+                                        else
+                                        {
+                                            <img class="card-img-top img-fluid" src="~/images/@item.LogoImageUrl" alt="Card image cap">
+                                        }
+                                        <div class="card-body">
+                                            <h6 class="card-title bold">@item.Name</h6>
+                                            <p class="card-text">@item.ShortDescription</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                        <a class="carousel-control-prev" href="#anotherCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#anotherCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
-                    <a class="carousel-control-prev" href="#anotherCarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#anotherCarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
                 </div>
-            </div>
 
                 @*Bootstrap Multi card Carousel start*@
 

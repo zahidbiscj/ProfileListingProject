@@ -1,0 +1,85 @@
+﻿@model ProfileListingProject.Web.Areas.Manager.Models.CompanyServiceUpdateModel
+@{
+    ViewData["Title"] = "Edit Company Service";
+}
+
+@section notification
+{
+    @await Html.PartialAsync("_Notification", Model.Notification)
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Edit Service</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form role="form" action="~/Manager/CompanyService/Edit" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" value="@Model.Id" name="Id" />
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input name="Name" value="@Model.Name" type="text" class="form-control" placeholder="Enter your Name...">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="Description" value="@Model.Description" class="form-control" rows="3" placeholder="Enter Description..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label asp-for="PricingRate.RateType" class="control-label">Rate Type </label>
+                                <select name="PricingRate.RateType" class="form-control form-control-sm" style="width: 100%;">
+                                    <option disabled selected value="@Model.PricingRate.RateType"></option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input name="PricingRate.Amount" value="@Model.PricingRate.Amount" type="number" class="form-control" placeholder="Enter the Service price">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <dl>
+                                        <dd>
+                                            <input disabled name="ImageUrl" value="ImageUrl" type="file">
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="btn btn-primary" type="submit" value="Submit" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+
+        </div>
+        <!--/.col (left) -->
+    </div>
+</div>
+

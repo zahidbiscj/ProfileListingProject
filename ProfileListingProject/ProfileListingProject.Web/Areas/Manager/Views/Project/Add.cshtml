@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1>Add Project</h1>
+
+@section styles
+{
+    <style>
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            color: blue;
+        }
+    </style>
+    <link href="~/manager/plugins/select2/css/select2.min.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script src="~/manager/plugins/select2/js/select2.full.min.js"></script>
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+        })
+    </script>
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <form enctype="multipart/form-data" method="post" asp-controller="Company" asp-action="Add">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements disabled -->
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Add your Company Profile</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input name="Name" type="text" class="form-control" placeholder="Enter your Name...">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea name="Description" class="form-control" rows="3" placeholder="Enter Description..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input name="DemoAccount[0].Username" type="text" class="form-control" placeholder="Enter your Username...">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input name="DemoAccount[0].Password" type="password" class="form-control" placeholder="Enter your password">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>URL</label>
+                                        <input name="DemoAccount[0].Url" type="url" class="form-control" placeholder="Enter Project Url...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <dl>
+                                            <dd>
+                                                <input name="ImageUrl" type="file">
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="btn btn-primary" type="submit" value="Submit" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <!--/.col (right) -->
+            </div>
+        </form>
+    </div>
+</section>

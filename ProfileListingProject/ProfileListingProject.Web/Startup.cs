@@ -47,7 +47,7 @@ namespace ProfileListingProject.Web
             services.AddDbContext<ApplicationDbContext>(options => 
                 options.UseSqlServer(connectionString,m => m.MigrationsAssembly(migrationAssemblyName)));
 
-            services.AddDbContext<StoreContext>(x => 
+            services.AddDbContext<OfficeContext>(x => 
                 x.UseSqlServer(connectionString, m => m.MigrationsAssembly(migrationAssemblyName)));
 
             services.AddDefaultIdentity<IdentityUser>()
@@ -89,6 +89,10 @@ namespace ProfileListingProject.Web
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                  );
                 routes.MapRoute(
                     name : "areas",
                     template : "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"

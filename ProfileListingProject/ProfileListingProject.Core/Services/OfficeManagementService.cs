@@ -52,7 +52,7 @@ namespace ProfileListingProject.Core.Services
 
         public Company GetCompany(int id)
         {
-            throw new NotImplementedException();
+            return _officeUnitOfWork.CompanyRepository.GetCompaniesIncludingChild(id);
         }
 
         public Company GetCompanyByName(string name)

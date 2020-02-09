@@ -9,7 +9,7 @@ using ProfileListingProject.Core.Contexts;
 
 namespace ProfileListingProject.Web.Migrations
 {
-    [DbContext(typeof(StoreContext))]
+    [DbContext(typeof(OfficeContext))]
     [Migration("20200206123349_AllEntityAddedDoneWithRelationShip")]
     partial class AllEntityAddedDoneWithRelationShip
     {

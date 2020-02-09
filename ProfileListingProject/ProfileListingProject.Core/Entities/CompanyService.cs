@@ -8,7 +8,7 @@ namespace ProfileListingProject.Core.Entities
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public string Description { get; set; }
-        public RateType PricingRate { get; set; }
+        public PricingRate PricingRate { get; set; }
         public int CompanyId { get; set; }
         public Company Company { get; set; }
     }

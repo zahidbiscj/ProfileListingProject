@@ -7,8 +7,10 @@ using System.Text;
 
 namespace ProfileListingProject.Core.UnitOfWorks
 {
-    public interface IOfficeUnitOfWork : IUnitOfWork<StoreContext>
+    public interface IOfficeUnitOfWork : IUnitOfWork<OfficeContext>
     {
         ICompanyRepository CompanyRepository { get; set; }
+        IProjectRepository ProjectRepository { get; set; }
+        ICompanyServiceRepository CompanyServiceRepository { get; set; }
     }
 }

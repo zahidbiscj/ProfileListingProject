@@ -11,8 +11,8 @@ namespace ProfileListingProject.Core.Repositories
 {
     public class ProductCategoryRepository : Repository<ProductCategory>, IProductCategoryRepository
     {
-        private StoreContext _context;
-        public ProductCategoryRepository(StoreContext dbContext)
+        private OfficeContext _context;
+        public ProductCategoryRepository(OfficeContext dbContext)
             : base(dbContext)
         {
             _context = dbContext;

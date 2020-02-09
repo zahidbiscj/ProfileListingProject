@@ -1,0 +1,86 @@
+﻿@model ProfileListingProject.Web.Areas.Manager.Models.CompanyServiceUpdateModel
+@{
+    ViewData["Title"] = "Add Company Service";
+}
+
+@section styles
+{
+   
+}
+
+@section scripts
+{
+    
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <form enctype="multipart/form-data" method="post" asp-controller="CompanyService" asp-action="Add">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements disabled -->
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Add Company Service</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input name="Name" type="text" class="form-control" placeholder="Enter your Name...">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea name="Description" class="form-control" rows="3" placeholder="Enter Description..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label asp-for="PricingRate.RateType" class="control-label">Rate Type </label>
+                                        <select name="PricingRate.RateType" class="form-control form-control-sm" style="width: 100%;">
+                                            <option disabled selected > Please Select a new Item </option>
+                                            @foreach (var item in ViewBag.rateType)
+                                            {
+                                                <option value="@item">@item</option>
+                                            }
+                                        </select>
+                                    </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Amount</label>
+                                        <input name="PricingRate.Amount" type="number" class="form-control" placeholder="Enter the Service price">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <dl>
+                                            <dd>
+                                                <input name="ImageUrl" type="file">
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="btn btn-primary" type="submit" value="Submit" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <!--/.col (right) -->
+            </div>
+        </form>
+    </div>
+</section>
