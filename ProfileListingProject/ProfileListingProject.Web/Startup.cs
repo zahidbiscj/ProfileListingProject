@@ -47,7 +47,7 @@ namespace ProfileListingProject.Web
             services.AddDbContext<ApplicationDbContext>(options => 
                 options.UseSqlServer(connectionString,m => m.MigrationsAssembly(migrationAssemblyName)));
 
-            services.AddDbContext<OfficeContext>(x => 
+            services.AddDbContext<StoreContext>(x => 
                 x.UseSqlServer(connectionString, m => m.MigrationsAssembly(migrationAssemblyName)));
 
             services.AddDefaultIdentity<IdentityUser>()

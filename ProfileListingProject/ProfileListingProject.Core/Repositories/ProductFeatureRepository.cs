@@ -11,7 +11,7 @@ namespace ProfileListingProject.Core.Repositories
     public class ProductFeatureRepository : Repository<ProductFeature>,IProductFeatureRepository
     {
         public ProductFeatureRepository(IStoreContext storeContext)
-            :base((OfficeContext)storeContext)
+            :base((StoreContext)storeContext)
         {
 
         }

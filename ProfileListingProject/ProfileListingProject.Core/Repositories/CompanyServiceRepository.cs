@@ -12,8 +12,8 @@ namespace ProfileListingProject.Core.Repositories
 {
     public class CompanyServiceRepository : Repository<CompanyService>, ICompanyServiceRepository
     {
-        private OfficeContext _context;
-        public CompanyServiceRepository(OfficeContext dbContext)
+        private StoreContext _context;
+        public CompanyServiceRepository(StoreContext dbContext)
             : base(dbContext)
         {
             _context = dbContext;

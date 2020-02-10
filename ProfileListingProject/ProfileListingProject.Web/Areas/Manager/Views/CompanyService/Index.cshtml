@@ -20,7 +20,7 @@
             $('#example1').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "ajax": "/Manager/CompanyService/Index",
+                "ajax": "/Manager/CompanyService/GetCompanyService",
                 "columnDefs": [
                     {
                         "orderable": false,
@@ -33,7 +33,7 @@
                         "orderable": false,
                         "targets": 3,
                         "render": function (data, type, row) {
-                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/category/edit/${data}'" value='${data}'>
+                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/Manager/CompanyService/Edit/${data}'" value='${data}'>
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Edit
@@ -77,6 +77,7 @@
                         <tr>
                             <th><input type="checkbox" /></th>
                             <th>Name</th>
+                            <th>Description</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -101,7 +102,7 @@
             </div>
             <div class="modal-body">
                 <p>One fine body&hellip;</p>
-                <form id="deleteForm" action="/admin/category/delete" method="post">
+                <form id="deleteForm" action="/Manager/CompanyService/Delete" method="post">
                     @Html.AntiForgeryToken()
                     <input type="hidden" id="deleteId" value="" name="id" />
                 </form>

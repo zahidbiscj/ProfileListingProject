@@ -10,6 +10,7 @@ namespace ProfileListingProject.Core.Entities
         public int Id { get; set; }
         public RateType RateType { get; set; }
         public decimal Amount { get; set; }
+        public int CompanyServiceId { get; set; }
         public CompanyService CompanyService { get; set; }
     }
 }

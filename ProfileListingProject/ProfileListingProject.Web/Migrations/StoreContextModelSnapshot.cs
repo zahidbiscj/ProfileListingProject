@@ -8,7 +8,7 @@ using ProfileListingProject.Core.Contexts;
 
 namespace ProfileListingProject.Web.Migrations
 {
-    [DbContext(typeof(OfficeContext))]
+    [DbContext(typeof(StoreContext))]
     partial class StoreContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -88,8 +88,6 @@ namespace ProfileListingProject.Web.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("PricingRate");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
@@ -145,13 +143,14 @@ namespace ProfileListingProject.Web.Migrations
 
                     b.Property<decimal>("Amount");
 
-                    b.Property<int?>("CompanyServiceId");
+                    b.Property<int>("CompanyServiceId");
 
                     b.Property<int>("RateType");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyServiceId");
+                    b.HasIndex("CompanyServiceId")
+                        .IsUnique();
 
                     b.ToTable("PricingRates");
                 });
@@ -303,8 +302,9 @@ namespace ProfileListingProject.Web.Migrations
             modelBuilder.Entity("ProfileListingProject.Core.Entities.PricingRate", b =>
                 {
                     b.HasOne("ProfileListingProject.Core.Entities.CompanyService", "CompanyService")
-                        .WithMany()
-                        .HasForeignKey("CompanyServiceId");
+                        .WithOne("PricingRate")
+                        .HasForeignKey("ProfileListingProject.Core.Entities.PricingRate", "CompanyServiceId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ProfileListingProject.Core.Entities.Product", b =>

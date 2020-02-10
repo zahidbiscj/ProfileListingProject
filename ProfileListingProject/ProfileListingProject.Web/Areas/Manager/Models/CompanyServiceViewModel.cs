@@ -39,6 +39,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
                         {
                                 record.Id.ToString(),
                                 record.Name,
+                                record.Description,
                                 record.Id.ToString()
                         }
                     ).ToArray()

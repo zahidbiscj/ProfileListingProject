@@ -25,12 +25,12 @@ namespace ProfileListingProject.Core
         }
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<OfficeContext>()
+            builder.RegisterType<StoreContext>()
                    .WithParameter("connectionString", _connectionString)
                    .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                    .InstancePerLifetimeScope();
 
-            builder.RegisterType<OfficeContext>().As<IStoreContext>()
+            builder.RegisterType<StoreContext>().As<IStoreContext>()
                    .WithParameter("connectionString", _connectionString)
                    .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                    .InstancePerLifetimeScope();

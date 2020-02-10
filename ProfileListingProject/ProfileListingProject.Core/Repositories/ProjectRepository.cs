@@ -10,7 +10,7 @@ namespace ProfileListingProject.Core.Repositories
 {
     public class ProjectRepository : Repository<Project> , IProjectRepository
     {
-        public ProjectRepository(OfficeContext storeContext)
+        public ProjectRepository(StoreContext storeContext)
             : base(storeContext)
         {
 

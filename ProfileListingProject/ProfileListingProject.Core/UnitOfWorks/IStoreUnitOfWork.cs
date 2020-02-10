@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ProfileListingProject.Core.UnitOfWorks
 {
-    public interface IStoreUnitOfWork : IUnitOfWork<OfficeContext>
+    public interface IStoreUnitOfWork : IUnitOfWork<StoreContext>
     {
         ICategoryRepository CategoryRepository { get; set; }
         IProductFeatureRepository ProductFeatureRepository { get; set; }

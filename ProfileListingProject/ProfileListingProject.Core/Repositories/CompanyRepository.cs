@@ -12,8 +12,8 @@ namespace ProfileListingProject.Core.Repositories
 {
     public class CompanyRepository : Repository<Company>, ICompanyRepository
     {
-        private OfficeContext _context;
-        public CompanyRepository(OfficeContext context)
+        private StoreContext _context;
+        public CompanyRepository(StoreContext context)
             :base(context)
         {
             _context = context;

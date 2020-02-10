@@ -41,6 +41,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
                 var uniqueFileName = model.GetUploadedImage(model.Image.FileName);
                 model.AddNewService(uniqueFileName);
             }
+            ViewBag.rateType = Enum.GetNames(typeof(RateType));
             return View();
         }
 

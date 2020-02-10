@@ -6,12 +6,12 @@ using System.Text;
 
 namespace ProfileListingProject.Core.Contexts
 {
-    public class OfficeContext : DbContext,IStoreContext
+    public class StoreContext : DbContext,IStoreContext
     {
         private string _connectionString;
         private string _migrationAssemblyName;
 
-        public OfficeContext(string connectionString,string migrationAssemblyName)
+        public StoreContext(string connectionString,string migrationAssemblyName)
         {
             _connectionString = connectionString;
             _migrationAssemblyName = migrationAssemblyName;

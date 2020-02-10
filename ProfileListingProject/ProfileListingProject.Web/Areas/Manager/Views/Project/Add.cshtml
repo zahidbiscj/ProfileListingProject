@@ -1,4 +1,4 @@
-﻿
+﻿@model ProfileListingProject.Web.Areas.Manager.Models.ProjectUpdateModel
 @{
     ViewData["Title"] = "Add";
 }
@@ -26,16 +26,22 @@
     </script>
 }
 
+
+@section notification
+{
+    @await Html.PartialAsync("_Notification", Model.Notification)
+}
+
 <section class="content">
     <div class="container-fluid">
-        <form enctype="multipart/form-data" method="post" asp-controller="Company" asp-action="Add">
+        <form enctype="multipart/form-data" method="post" asp-controller="Project" asp-action="Add">
             @Html.AntiForgeryToken()
             <div class="row">
                 <div class="col-md-12">
                     <!-- general form elements disabled -->
                     <div class="card card-warning">
                         <div class="card-header">
-                            <h3 class="card-title">Add your Company Profile</h3>
+                            <h3 class="card-title">Add Project For your Company</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -44,7 +50,7 @@
                                     <!-- text input -->
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input name="Name" type="text" class="form-control" placeholder="Enter your Name...">
+                                        <input name="Name" type="text" class="form-control" required placeholder="Enter your Name...">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -79,7 +85,7 @@
                                     <div class="form-group">
                                         <dl>
                                             <dd>
-                                                <input name="ImageUrl" type="file">
+                                                <input name="Image" type="file" required>
                                             </dd>
                                         </dl>
                                     </div>

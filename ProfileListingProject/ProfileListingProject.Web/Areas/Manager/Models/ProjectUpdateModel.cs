@@ -73,7 +73,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
         {
             var randomName = Path.GetRandomFileName().Replace(".", "");
             var fileName = System.IO.Path.GetFileName(imageFileName);
-            var newpath = $"{ randomName }{ Path.GetExtension(imageFileName)}";
+            var newpath = $"{ randomName }{ Path.GetExtension(imageFileName).ToLower()}";
 
             var path = $"wwwroot/images/{randomName}{Path.GetExtension(imageFileName)}";
 

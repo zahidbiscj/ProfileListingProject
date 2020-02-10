@@ -42,9 +42,9 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
                     Description = this.Description,
                     PricingRate = this.PricingRate,
                     ImageUrl = uniqueFileName,
-                    CompanyId = this.CompanyId
+                    CompanyId = 2
                 });
-                Notification = new NotificationModel("success", "Company Service Added Successfully", NotificationType.Success);
+                Notification = new NotificationModel("Success", "Company Service Added Successfully", NotificationType.Success);
             }
             catch (Exception e)
             {
@@ -73,7 +73,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
         {
             var randomName = Path.GetRandomFileName().Replace(".", "");
             var fileName = System.IO.Path.GetFileName(imageFileName);
-            var newpath = $"{ randomName }{ Path.GetExtension(imageFileName)}";
+            var newpath = $"{ randomName }{ Path.GetExtension(imageFileName).ToLower()}";
 
             var path = $"wwwroot/images/{randomName}{Path.GetExtension(imageFileName)}";
 

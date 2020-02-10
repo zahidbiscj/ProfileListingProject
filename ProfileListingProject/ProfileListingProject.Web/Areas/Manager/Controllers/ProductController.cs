@@ -29,7 +29,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         }
 
         public IActionResult Add()
-        {
+       {
             var model = new ProductUpdateModel();
             var categories = model.GetAllCategoryList();
             ViewBag.CategoryList = categories;

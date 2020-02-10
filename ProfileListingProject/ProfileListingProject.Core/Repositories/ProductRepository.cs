@@ -14,7 +14,7 @@ namespace ProfileListingProject.Core.Repositories
     {
         private IStoreContext _storeContext;
         public ProductRepository(IStoreContext storeContext)
-            : base((OfficeContext)storeContext)
+            : base((StoreContext)storeContext)
         {
             _storeContext = storeContext;
         }
