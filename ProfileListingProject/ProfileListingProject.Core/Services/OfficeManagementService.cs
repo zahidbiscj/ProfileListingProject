@@ -35,9 +35,20 @@ namespace ProfileListingProject.Core.Services
             throw new NotImplementedException();
         }
 
-        public void EditCompany(Company Company)
+        public void EditCompany(Company company)
         {
-            throw new NotImplementedException();
+            var oldCompany = _officeUnitOfWork.CompanyRepository.GetCompaniesIncludingChild(company.Id);
+
+            oldCompany.Name = company.Name;
+            oldCompany.ShortDescription = company.ShortDescription;
+            oldCompany.Address = company.Address;
+            oldCompany.LogoImageUrl = company.LogoImageUrl;
+            oldCompany.Phone = company.Phone;
+            oldCompany.AreaOfOperations = company.AreaOfOperations;
+            oldCompany.Teams = company.Teams;
+            oldCompany.TechnologyInfos = company.TechnologyInfos;
+
+            _officeUnitOfWork.Save();
         }
 
         public IEnumerable<Company> GetAllCompanies()

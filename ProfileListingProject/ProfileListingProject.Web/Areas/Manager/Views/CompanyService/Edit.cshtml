@@ -34,7 +34,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea name="Description" value="@Model.Description" class="form-control" rows="3" placeholder="Enter Description..."></textarea>
+                                    @Html.TextArea("Description", null, new { @rows = "4", @cols = "50" })
                                 </div>
                             </div>
                         </div>
@@ -60,11 +60,6 @@
                                             <input disabled name="ImageUrl" value="ImageUrl" type="file">
                                         </dd>
                                     </dl>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="btn btn-primary" type="submit" value="Submit" />
                                 </div>
                             </div>
                         </div>

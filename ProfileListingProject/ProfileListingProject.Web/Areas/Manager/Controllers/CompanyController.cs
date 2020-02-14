@@ -55,9 +55,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
 
         }
 
-        public IActionResult Add()
+        public IActionResult Update(int CompanyId)
         {
             var model = new CompanyUpdateModel();
+            //model.Load(CompanyId);
+
             var technologyInfos = new List<TechnologyInfo>() { new TechnologyInfo { Name= "alpant" },
                 new TechnologyInfo { Name = "pant"},new TechnologyInfo{ Name = "basha mia"} };
             model.TechnologyInfos = technologyInfos.Select(x => new TechnologyInfo { Name = x.Name, Id = x.Id }).ToList();
@@ -67,14 +69,14 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         //Add Image to S3 Bucket 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(CompanyUpdateModel model)
+        public async Task<IActionResult> Update(CompanyUpdateModel model)
         {
             try
             {
                 await model.InsertImageToS3BucketAsync(model.ProfileImage);
                 if (ModelState.IsValid)
                 {
-                    model.AddNewCompany();
+                    model.EditCompany();
                 }
             }
             catch (Exception e)

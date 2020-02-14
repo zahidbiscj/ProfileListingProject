@@ -1,11 +1,15 @@
 ﻿@model ProfileListingProject.Web.Areas.Manager.Models.CompanyUpdateModel
 @{
-    ViewData["Title"] = "Add Company";
+    ViewData["Title"] = "Update Company";
 }
 
 @section styles
 {
-    <style>.select2-container--default .select2-selection--multiple .select2-selection__choice {color:blue;} </style>
+    <style>
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            color: blue;
+        }
+    </style>
     <link href="~/manager/plugins/select2/css/select2.min.css" rel="stylesheet" />
 }
 
@@ -33,14 +37,14 @@
 
 <section class="content">
     <div class="container-fluid">
-        <form enctype="multipart/form-data" method="post" asp-controller="Company" asp-action="Add">
+        <form enctype="multipart/form-data" method="post" asp-controller="Company" asp-action="Update">
             @Html.AntiForgeryToken()
             <div class="row">
                 <div class="col-md-12">
                     <!-- general form elements disabled -->
                     <div class="card card-warning">
                         <div class="card-header">
-                            <h3 class="card-title">Add your Company Profile</h3>
+                            <h3 class="card-title">Update Company Profile Information</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -78,8 +82,11 @@
                                     <div class="form-group">
                                         <label>Select Multiple Technology</label>
                                         @Html.DropDownListFor(m => m.TechnologyList,
-                                       Model.TechnologyInfos.Select(x => new SelectListItem { Text = x.Name, Value = x.Name
-                                       }),new { @class = "select2",@multiple = "multiple",@style = "width: 100%" })
+                                       Model.TechnologyInfos.Select(x => new SelectListItem
+                                            {
+                                                Text = x.Name,
+                                                Value = x.Name
+                                       }), new { @class = "select2", @multiple = "multiple", @style = "width: 100%" })
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

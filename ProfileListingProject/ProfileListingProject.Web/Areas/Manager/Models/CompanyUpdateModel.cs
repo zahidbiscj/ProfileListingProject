@@ -17,8 +17,8 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
 {
     public class CompanyUpdateModel : BaseModel
     {
-        private const string bucketName = "zahidaspnetclassimage";
-        private const string queueUrl = "https://sqs.us-east-1.amazonaws.com/441185707589/codesubmission";
+        private const string bucketName = "aspnetimage";
+        private const string queueUrl = "https://sqs.us-east-1.amazonaws.com/441185707589/imageupload";
         private string newFileName;
 
         public int Id { get; set; }
@@ -44,11 +44,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             _officeService = Startup.AutoFacContainer.Resolve<IOfficeManagementService>();
         }
 
-        public void AddNewCompany()
+        public void EditCompany()
         {
             try
             {
-                _officeService.AddNewCompany(new Company()
+                _officeService.EditCompany(new Company()
                 {
                     Name = this.Name,
                     Address = this.Address,
@@ -70,6 +70,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             var fileName = System.IO.Path.GetFileName(imageFile.Name);
             newFileName = $"{ randomName }{ Path.GetExtension(imageFile.FileName).ToLower()}";
             return newFileName;
+        }
+
+        internal void Load(int companyId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task InsertImageToS3BucketAsync(IFormFile imageFile)
