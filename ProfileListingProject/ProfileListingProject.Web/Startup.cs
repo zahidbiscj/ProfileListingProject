@@ -74,6 +74,8 @@ namespace ProfileListingProject.Web
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+            services.AddSingleton<UserManager<IdentityUser>>();
+            services.AddSingleton<SignInManager<IdentityUser>>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
