@@ -26,10 +26,13 @@
   <ItemGroup>
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\BaseModel.cs" />
     <Compile Include="Areas\Admin\Models\NotificationModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleUpdateModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\UserUpdateModel.cs" />
+    <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
   </ItemGroup>
 
   
@@ -58,6 +61,7 @@
     <None Include="Areas\Admin\Views\Role\Index.cshtml" />
     <None Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <None Include="Areas\Admin\Views\Shared\_Notification.cshtml" />
+    <None Include="Areas\Admin\Views\User\Add.cshtml" />
     <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
   </ItemGroup>
 

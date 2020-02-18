@@ -28,8 +28,7 @@ namespace ProfileListingProject.Core.Contexts
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
-        {
-                
+        {        
             builder.Entity<Product>()
                 .HasMany(x => x.PricingModels);
             builder.Entity<Product>()
