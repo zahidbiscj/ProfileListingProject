@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ProfileListingProject.Core.Entities;
 using ProfileListingProject.Web.Areas.Admin.Models;
 
 namespace ProfileListingProject.Web.Areas.Admin.Controllers
@@ -14,10 +15,10 @@ namespace ProfileListingProject.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class UserController : Controller
     {
-        public UserManager<IdentityUser> _userManager;
+        public UserManager<ExtendedIdentityUser> _userManager;
         public RoleManager<IdentityRole> _roleManager;
         public IEmailSender _emailSender;
-        public UserController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender)
+        public UserController(UserManager<ExtendedIdentityUser> userManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender)
         {
             _emailSender = emailSender;
             _roleManager = roleManager;
@@ -51,7 +52,7 @@ namespace ProfileListingProject.Web.Areas.Admin.Controllers
             model.ReturnUrl = model.ReturnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                var user = new ExtendedIdentityUser { UserName = model.Email, Email = model.Email };
                 var result = await model.AddNewUser(user);
                 if (result.Succeeded)
                 {

@@ -24,10 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Areas\Admin\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\BaseModel.cs" />
+    <Compile Include="Areas\Admin\Models\CompanyUpdateModel.cs" />
+    <Compile Include="Areas\Admin\Models\CompanyViewModel.cs" />
     <Compile Include="Areas\Admin\Models\NotificationModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleUpdateModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
@@ -56,6 +59,7 @@
 
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Company\Add.cshtml" />
     <None Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <None Include="Areas\Admin\Views\Role\Add.cshtml" />
     <None Include="Areas\Admin\Views\Role\Index.cshtml" />

@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ProfileListingProject.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -31,19 +32,19 @@ namespace ProfileListingProject.Web.Areas.Admin.Models
         public List<SelectListItem> Roles { get; set; }
         public string ReturnUrl { get; set; }
 
-        public UserManager<IdentityUser> _userManager;
+        public UserManager<ExtendedIdentityUser> _userManager;
         public RoleManager<IdentityRole> _roleManager;
         public UserUpdateModel()
         {
-            _userManager = Startup.AutoFacContainer.Resolve<UserManager<IdentityUser>>();
+            _userManager = Startup.AutoFacContainer.Resolve<UserManager<ExtendedIdentityUser>>();
             _roleManager = Startup.AutoFacContainer.Resolve<RoleManager<IdentityRole>>();
         }
-        public UserUpdateModel(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public UserUpdateModel(UserManager<ExtendedIdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
         }
-        public async Task<IdentityResult> AddNewUser(IdentityUser user)
+        public async Task<IdentityResult> AddNewUser(ExtendedIdentityUser user)
         {
             try
             {

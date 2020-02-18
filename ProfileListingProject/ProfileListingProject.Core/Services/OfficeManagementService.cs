@@ -25,7 +25,8 @@ namespace ProfileListingProject.Core.Services
                 ShortDescription = company.ShortDescription,
                 Address = company.Address,
                 LogoImageUrl = company.LogoImageUrl,
-                Phone = company.Phone
+                Phone = company.Phone,
+                UserId = company.UserId
             });
             _officeUnitOfWork.Save();
         }

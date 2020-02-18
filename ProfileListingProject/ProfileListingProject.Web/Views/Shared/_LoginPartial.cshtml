@@ -1,6 +1,7 @@
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using ProfileListingProject.Core.Entities
+@inject SignInManager<ExtendedIdentityUser> SignInManager
+@inject UserManager<ExtendedIdentityUser> UserManager
 
     <ul class="list-inline">
         @if (SignInManager.IsSignedIn(User))

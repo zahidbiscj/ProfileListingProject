@@ -9,21 +9,22 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using ProfileListingProject.Core.Entities;
 using ProfileListingProject.Web.Models;
 
 namespace ProfileListingProject.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ExtendedIdentityUser> _signInManager;
+        private readonly UserManager<ExtendedIdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public AccountController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<ExtendedIdentityUser> userManager,
+            SignInManager<ExtendedIdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             RoleManager<IdentityRole> roleManager,
             IEmailSender emailSender)
@@ -100,7 +101,7 @@ namespace ProfileListingProject.Web.Controllers
             model.ReturnUrl = model.ReturnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                var user = new ExtendedIdentityUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

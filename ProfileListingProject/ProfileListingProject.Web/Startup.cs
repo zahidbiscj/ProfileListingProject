@@ -18,6 +18,7 @@ using Autofac.Extensions.DependencyInjection;
 using ProfileListingProject.Core;
 using ProfileListingProject.Data;
 using ProfileListingProject.Core.Contexts;
+using ProfileListingProject.Core.Entities;
 
 namespace ProfileListingProject.Web
 {
@@ -50,9 +51,9 @@ namespace ProfileListingProject.Web
             services.AddDbContext<StoreContext>(x => 
                 x.UseSqlServer(connectionString, m => m.MigrationsAssembly(migrationAssemblyName)));
 
-            services.AddIdentity<IdentityUser,IdentityRole>()
+            services.AddIdentity<ExtendedIdentityUser,IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<StoreContext>()
                 .AddDefaultTokenProviders();
 
             services.AddEntityFrameworkSqlServer();
@@ -95,8 +96,8 @@ namespace ProfileListingProject.Web
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-            services.AddSingleton<UserManager<IdentityUser>>();
-            services.AddSingleton<SignInManager<IdentityUser>>();
+            services.AddSingleton<UserManager<ExtendedIdentityUser>>();
+            services.AddSingleton<SignInManager<ExtendedIdentityUser>>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

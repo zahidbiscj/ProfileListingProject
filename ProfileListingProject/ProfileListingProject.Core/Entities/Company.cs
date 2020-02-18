@@ -13,6 +13,8 @@ namespace ProfileListingProject.Core.Entities
         public string ShortDescription { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
+        public string UserId { get; set; }
+        public ExtendedIdentityUser User { get; set; }
         public IList<AreaOfOperation> AreaOfOperations { get; set; }
         public IList<TechnologyInfo> TechnologyInfos { get; set; }
         public IList<Team> Teams { get; set; }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Autofac;
 using Microsoft.AspNetCore.Mvc;
+using ProfileListingProject.Core.Entities;
 using ProfileListingProject.Core.Services.Interface;
 using ProfileListingProject.Web.Models;
 
@@ -16,6 +18,13 @@ namespace ProfileListingProject.Web.Controllers
         public HomeController(IOfficeManagementService officeManagementService)
         {
             _officeManagementService = officeManagementService;
+        }
+        public IActionResult Result()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var company = new Company() { UserId = userId, Address = "sa", LogoImageUrl = "sa", Name = "assa", Phone = "21312" };
+            //_officeManagementService.AddNewCompany(company);
+            return View();
         }
         public IActionResult Index()
         {

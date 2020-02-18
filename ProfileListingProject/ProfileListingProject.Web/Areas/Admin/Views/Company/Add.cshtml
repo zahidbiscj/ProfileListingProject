@@ -1,0 +1,45 @@
+﻿@model ProfileListingProject.Web.Areas.Admin.Models.CompanyUpdateModel
+@{
+    ViewData["Title"] = "Add a Company";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@section notification
+{
+    @await Html.PartialAsync("_Notification", Model.Notification)
+}
+
+<div class="row">
+    <div class="col-md-4 aligncenter">
+        <form role="form" action="~/Admin/Company/Add" method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input name="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input type="text" name="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label">Role </label>
+                <select name="Role" class="form-control form-control-sm select2" style="width: 100%;">
+                    <option disabled selected> Please Add Role of User</option>
+                    @foreach (var item in Model.Roles)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

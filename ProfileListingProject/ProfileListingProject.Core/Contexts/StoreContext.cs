@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ProfileListingProject.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace ProfileListingProject.Core.Contexts
 {
-    public class StoreContext : DbContext,IStoreContext
+    public class StoreContext : IdentityDbContext<ExtendedIdentityUser>,IStoreContext
     {
         private string _connectionString;
         private string _migrationAssemblyName;
@@ -28,7 +29,11 @@ namespace ProfileListingProject.Core.Contexts
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
-        {        
+        {
+            builder.Entity<ExtendedIdentityUser>()
+                .HasOne(x => x.Company)
+                .WithOne(x => x.User);
+
             builder.Entity<Product>()
                 .HasMany(x => x.PricingModels);
             builder.Entity<Product>()
