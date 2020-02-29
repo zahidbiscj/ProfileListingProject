@@ -22,7 +22,8 @@ namespace ProfileListingProject.Core.Services
                 Description = product.Description,
                 Categories = product.Categories,
                 ImageUrl = product.ImageUrl,
-                ProductFeatures = product.ProductFeatures
+                ProductFeatures = product.ProductFeatures,
+                CompanyId = product.CompanyId
             });
             _storeUnitOfWork.Save();
         }
@@ -63,7 +64,8 @@ namespace ProfileListingProject.Core.Services
             return _storeUnitOfWork.ProductCategoryRepository.GetProductCategoryByProductId(productId);
         }
 
-        public IEnumerable<Product> GetProducts(int pageIndex,
+        public IEnumerable<Product> GetProducts(int companyId,
+            int pageIndex,
             int pageSize,
             string searchText,
             out int total,
@@ -72,7 +74,7 @@ namespace ProfileListingProject.Core.Services
             return _storeUnitOfWork.ProductRepository.Get(
                out total,
                out totalFiltered,
-               x => x.Name.Contains(searchText),
+               x => x.Name.Contains(searchText) && x.CompanyId == companyId,
                null,
                "",
                pageIndex,

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using ProfileListingProject.Core.Entities;
 using ProfileListingProject.Core.Services.Interface;
 using ProfileListingProject.Web.Models;
 using System;
@@ -11,22 +12,26 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
     public class ProductViewModel : BaseModel
     {
         private IProductService _productService;
+        private IOfficeManagementService _officeManagementService;
 
         public ProductViewModel()
         {
             _productService = Startup.AutoFacContainer.Resolve<IProductService>();
+            _officeManagementService = Startup.AutoFacContainer.Resolve<IOfficeManagementService>();
         }
 
-        public ProductViewModel(IProductService productService)
+        public ProductViewModel(IProductService productService,IOfficeManagementService officeManagementService)
         {
             _productService = productService;
+            _officeManagementService = officeManagementService;
         }
 
-        public object GetProducts(DataTablesAjaxRequestModel tableModel)
+        public object GetProducts(DataTablesAjaxRequestModel tableModel, int companyId)
         {
             int total = 0;
             int totalFiltered = 0;
             var records = _productService.GetProducts(
+                companyId,
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
@@ -48,6 +53,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
                     ).ToArray()
 
             };
+        }
+
+        public Company GetCompany(string userId)
+        {
+            return _officeManagementService.GetCompanyByUserId(userId);
         }
 
         public void Delete(int id)

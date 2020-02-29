@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +23,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
 
         public IActionResult GetProducts()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new ProductViewModel();
-            var data = model.GetProducts(tableModel);
+            var company = model.GetCompany(userId);
+            var data = model.GetProducts(tableModel,company.Id);
             return Json(data);
         }
 
@@ -42,11 +45,13 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
             if (ModelState.IsValid)
             {
                 string path = null;
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
                 if (model.Image != null)
                 {
                     path = model.GetUploadedImage(model.Image.FileName);
                 }
-                model.AddNewProduct(path);
+                model.AddNewProduct(path,userId);
             }
             var categories = model.GetAllCategoryList();
             ViewBag.CategoryList = categories;

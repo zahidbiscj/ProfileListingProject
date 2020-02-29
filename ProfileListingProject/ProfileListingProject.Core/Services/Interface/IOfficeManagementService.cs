@@ -20,5 +20,6 @@ namespace ProfileListingProject.Core.Services.Interface
 
         Company GetCompanyByName(string name);
         IEnumerable<Company> GetAllCompanies();
+        Company GetCompanyByUserId(string userId);
     }
 }

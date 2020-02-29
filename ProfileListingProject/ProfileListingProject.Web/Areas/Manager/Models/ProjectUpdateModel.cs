@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ProfileListingProject.Web.Areas.Manager.Models
@@ -19,27 +20,32 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
         public IList<DemoAccountUrl> DemoAccount { get; set; }
         public int CompanyId { get; set; }
         private IProjectManagementService _projectManagementService;
+        private IOfficeManagementService _officeManagementService;
 
         public ProjectUpdateModel()
         {
             _projectManagementService = Startup.AutoFacContainer.Resolve<IProjectManagementService>();
+            _officeManagementService = Startup.AutoFacContainer.Resolve<IOfficeManagementService>();
         }
 
-        public ProjectUpdateModel(IProjectManagementService projectManagementService)
+        public ProjectUpdateModel(IProjectManagementService projectManagementService, IOfficeManagementService officeManagementService)
         {
             _projectManagementService = projectManagementService;
+            _officeManagementService = officeManagementService;
         }
 
-        public void AddNewProject(string uniqueFileName)
+        public void AddNewProject(string uniqueFileName,string userId)
         {
             try
             {
+                var company = _officeManagementService.GetCompanyByUserId(userId);
                 _projectManagementService.AddNewProject(new Project
                 {
                     Name = this.Name,
                     Description = this.Description,
                     DemoAccount = this.DemoAccount,
-                    ImageUrl =  uniqueFileName
+                    ImageUrl =  uniqueFileName,
+                    CompanyId = company.Id
                 });
                 Notification = new NotificationModel("success", "Project Added Successfully", NotificationType.Success);
             }

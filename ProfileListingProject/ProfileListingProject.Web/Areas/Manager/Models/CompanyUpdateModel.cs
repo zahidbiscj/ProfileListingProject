@@ -19,12 +19,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
     {
         private const string bucketName = "aspnetimage";
         private const string queueUrl = "https://sqs.us-east-1.amazonaws.com/441185707589/imageupload";
-        private string newFileName;
 
         public int Id { get; set; }
         public string Name { get; set; }
         public IFormFile ProfileImage { get; set; }//LogoImageUrl
-        //public string OfficePhotoUrl { get; set; }
+        public IFormFile OfficePhoto { get; set; }
         public string ShortDescription { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
@@ -44,18 +43,28 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             _officeService = Startup.AutoFacContainer.Resolve<IOfficeManagementService>();
         }
 
-        public void EditCompany()
+        public void EditCompany(string profileNewFileName, string officeNewFileName)
         {
             try
             {
+                //var listOftechnology = TechnologyList.ToList();
+                foreach (var item in TechnologyList)
+                {
+                    new TechnologyInfo { Name = item };
+                }
                 _officeService.EditCompany(new Company()
                 {
                     Name = this.Name,
                     Address = this.Address,
-                    LogoImageUrl = newFileName,
+                    LogoImageUrl = profileNewFileName,
                     ShortDescription = this.ShortDescription,
                     Phone = this.Phone,
-                    //OfficePhotoUrl = this.OfficePhotoUrl
+                    AreaOfOperations = this.AreaOfOperations,
+                    Teams = this.Teams,
+                    TechnologyInfos = new List<TechnologyInfo>() {
+                        
+                    },
+                    OfficePhotoUrl = officeNewFileName
                 });
             }
             catch (Exception)
@@ -68,7 +77,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
         {
             var randomName = Path.GetRandomFileName().Replace(".", "");
             var fileName = System.IO.Path.GetFileName(imageFile.Name);
-            newFileName = $"{ randomName }{ Path.GetExtension(imageFile.FileName).ToLower()}";
+            var newFileName = $"{ randomName }{ Path.GetExtension(imageFile.FileName).ToLower()}";
             return newFileName;
         }
 
@@ -77,7 +86,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             throw new NotImplementedException();
         }
 
-        public async Task InsertImageToS3BucketAsync(IFormFile imageFile)
+        public async Task<string> InsertImageToS3BucketAsync(IFormFile imageFile)
         {
             var newFileName = GetRandomizedNewFileName(imageFile);
             var path = $"wwwroot/images/{newFileName}";
@@ -86,6 +95,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             var client = new AmazonS3Client();
             var file = new FileInfo(path);
             await InsertImageToS3BucketAsync(file, newFileName, client);
+            return newFileName;
         }
 
         public void WriteFileInSystemDrive(string path)
@@ -115,18 +125,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
 
             if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
             {
-                var sqsClient = new AmazonSQSClient();
-                var sqsRequest = new SendMessageRequest
-                {
-                    QueueUrl = queueUrl,
-                    MessageBody = $"name: '{newFileName}'"
-                };
-
-                var sqsResponse = await sqsClient.SendMessageAsync(sqsRequest);
-                if (sqsResponse.HttpStatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    file.Delete();
-                }
+                file.Delete();
             }
         }
     }

@@ -21,21 +21,23 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
 
         private IProductService _productService;
         private ICategoryService _categoryService;
+        private IOfficeManagementService _officeManagementService;
         public ProductUpdateModel()
         {
             _productService = Startup.AutoFacContainer.Resolve<IProductService>();
             _categoryService = Startup.AutoFacContainer.Resolve<ICategoryService>();
+            _officeManagementService = Startup.AutoFacContainer.Resolve<IOfficeManagementService>();
+        }
+        public ProductUpdateModel(IProductService productService, ICategoryService categoryService,IOfficeManagementService officeManagementService)
+        {
+            _productService = productService;
+            _categoryService = categoryService;
+            _officeManagementService = officeManagementService;
         }
 
         public IEnumerable<Category> GetAllCategoryList()
         {
             return _categoryService.GetAllCategories();
-        }
-
-        public ProductUpdateModel(IProductService productService, ICategoryService categoryService)
-        {
-            _productService = productService;
-            _categoryService = categoryService;
         }
 
         public string GetUploadedImage(string imageFileName)
@@ -60,10 +62,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             return newpath;
         }
 
-        public void AddNewProduct(string uniqueFilePath)
+        public void AddNewProduct(string uniqueFilePath, string userId)
         {
             try
             {
+                var company = _officeManagementService.GetCompanyByUserId(userId);
                 var category = _categoryService.GetCategoryByName(this.Category.Name);
                 _productService.AddNewProduct(new Product
                 {
@@ -71,6 +74,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
                     Description = this.Description,
                     ProductFeatures = this.ProductFeatures,
                     ImageUrl = uniqueFilePath,
+                    CompanyId = company.Id,
                     Categories = new List<ProductCategory>() {
                             new ProductCategory{
                                 CategoryId = category.Id

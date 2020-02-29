@@ -18,6 +18,9 @@ namespace ProfileListingProject.Core.Services.Interface
         void EditCompanyService(CompanyService companyService);
         void DeleteCompanyService(int id);
         CompanyService GetCompanyServiceByName(string name);
-        IEnumerable<CompanyService> GetAllCompanyServices();
+        IEnumerable<CompanyService> GetAllCompanyServices(int companyId, int pageIndex, int pageSize,
+            string searchText, out int total,
+            out int totalFiltered);
+        IList<CompanyService> GetAllServicesOfCompany(int companyId);
     }
 }

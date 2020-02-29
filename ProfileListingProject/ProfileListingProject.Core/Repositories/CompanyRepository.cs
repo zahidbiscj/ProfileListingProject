@@ -31,5 +31,10 @@ namespace ProfileListingProject.Core.Repositories
                 .Include(nameof(Company.TechnologyInfos))
                 .Include(nameof(Company.Teams)).FirstOrDefault();
         }
+
+        public Company GetCompanyByUserId(string userId)
+        {
+            return _context.Companies.Where(x => x.UserId == userId).FirstOrDefault();
+        }
     }
 }

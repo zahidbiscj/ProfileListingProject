@@ -19,6 +19,11 @@ namespace ProfileListingProject.Core.Repositories
             _context = dbContext;
         }
 
+        public IList<CompanyService> GetAllServicesOfCompany(int companyId)
+        {
+            return _context.CompanyServices.Where(x => x.CompanyId == companyId).ToList();
+        }
+
         public CompanyService GetServiceWithPricingRate(int id)
         {
             return _context.CompanyServices.Where(x => x.Id == id)

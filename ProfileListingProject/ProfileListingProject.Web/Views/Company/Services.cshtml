@@ -1,6 +1,47 @@
-﻿
+﻿@model IList<ProfileListingProject.Core.Entities.CompanyService>
 @{
     ViewData["Title"] = "Services";
+}
+
+
+@section styles
+{
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+}
+
+
+@section scripts
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#myCarousel").on("slide.bs.carousel", function (e) {
+                var $e = $(e.relatedTarget);
+                var idx = $e.index();
+                var itemsPerSlide = 3;
+                var totalItems = $(".carousel-item").length;
+
+                if (idx >= totalItems - (itemsPerSlide - 1)) {
+                    var it = itemsPerSlide - (totalItems - idx);
+                    for (var i = 0; i < it; i++) {
+                        // append slides to end
+                        if (e.direction == "left") {
+                            $(".carousel-item")
+                                .eq(i)
+                                .appendTo(".carousel-inner");
+                        } else {
+                            $(".carousel-item")
+                                .eq(0)
+                                .appendTo($(this).find(".carousel-inner"));
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
 }
 
 <section id="inner-headline">
@@ -25,19 +66,257 @@
         <div class="row">
 
             <div class="span12">
-                <h4 class="title">What we do</h4>
-                <p>
-                    Ei mel semper vocent persequeris, nominavi patrioque vituperata id vim, cu eam gloriatur philosophia deterruisset. Meliore perfecto repudiare ea nam, ne mea duis temporibus. Id quo accusam consequuntur, eum ea debitis urbanitas. Nibh reformidans vim ne.
-                </p>
 
+                <h2 class="title">What we do</h2>
 
             </div>
 
         </div>
 
 
-        <div class="row">
+        <section id="content">
+            <div class="container">
 
+                @*Bootstrap Multi card Carousel start*@
+
+                <div class="container-fluid">
+                    @*<h1 class="text-center mb-3">Bootstrap Multi-Card Carousel</h1>*@
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner row w-100 mx-auto">
+                            <div class="carousel-item col-md-12 active">
+                                <div class="card">
+                                    <img class="card-img-top img-fluid" src="" height="800" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">card 1</h4>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @foreach (var item in ViewBag.Services)
+                            {
+                        <div class="carousel-item col-md-12">
+
+                            <h2 class="aligncenter">@item.Name</h2>
+                            <hr />
+                            <p>
+                                @item.Description
+                            </p>
+                            <hr />
+                            <div class="card">
+                                @if (string.IsNullOrEmpty(item.ImageUrl))
+                                {
+                                    <img class="card-img-top img-fluid" src="~/images/image-not-found.png" height="800" alt="Card image cap">
+                                }
+                                else
+                                {
+                                    <img class="card-img-top img-fluid" src="~/images/@item.ImageUrl" alt="Card image cap">
+                                }
+                                <div class="card-body">
+                                    <a href="#"><h6 class="card-title bold">@item.Name</h6></a>
+                                    <p class="card-text">@item.Description</p>
+                                </div>
+                            </div>
+
+                        </div>
+                            }
+                        </div>
+                        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+
+                @*Bootstrap Multi card Carousel End*@
+
+                <div class="row">
+                    <div class="span12">
+                        <div class="solidline"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span12">
+                        <div class="row">
+                            <div class="span12">
+                                <div class="aligncenter">
+                                    <h3>Our <strong>Pricing</strong></h3>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, labores dolorum scriptorem eum an, te quodsi sanctus neglegentur.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="span3">
+                                <div class="pricing-box-wrap animated-fast flyIn">
+                                    <div class="pricing-heading">
+                                        <h3>Very <strong>Basic</strong></h3>
+                                    </div>
+                                    <div class="pricing-terms">
+                                        <h6>&#36;15.00 / Month</h6>
+                                    </div>
+                                    <div class="pricing-content">
+                                        <ul>
+                                            <li><i class="icon-ok"></i> 100 applications</li>
+                                            <li><i class="icon-ok"></i> 24x7 support available</li>
+                                            <li><i class="icon-ok"></i> No hidden fees</li>
+                                            <li><i class="icon-ok"></i> Free 30-days trial</li>
+                                            <li><i class="icon-ok"></i> Stop anytime easily</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pricing-action">
+                                        <a href="#" class="btn btn-medium btn-theme"><i class="icon-chevron-down"></i> Sign Up</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="span3">
+                                <div class="pricing-box-wrap animated-fast flyIn">
+                                    <div class="pricing-heading">
+                                        <h3>Simple <strong>Choice</strong></h3>
+                                    </div>
+                                    <div class="pricing-terms">
+                                        <h6>&#36;20.00 / Month</h6>
+                                    </div>
+                                    <div class="pricing-content">
+                                        <ul>
+                                            <li><i class="icon-ok"></i> 100 applications</li>
+                                            <li><i class="icon-ok"></i> 24x7 support available</li>
+                                            <li><i class="icon-ok"></i> No hidden fees</li>
+                                            <li><i class="icon-ok"></i> Free 30-days trial</li>
+                                            <li><i class="icon-ok"></i> Stop anytime easily</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pricing-action">
+                                        <a href="#" class="btn btn-medium btn-theme"><i class="icon-chevron-down"></i> Sign Up</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="span3">
+                                <div class="pricing-box-wrap special animated-slow flyIn">
+                                    <div class="pricing-heading">
+                                        <h3>Special <strong>Choice</strong></h3>
+                                    </div>
+                                    <div class="pricing-terms">
+                                        <h6>&#36;15.00 / Month</h6>
+                                    </div>
+                                    <div class="pricing-content">
+                                        <ul>
+                                            <li><i class="icon-ok"></i> 100 applications</li>
+                                            <li><i class="icon-ok"></i> 24x7 support available</li>
+                                            <li><i class="icon-ok"></i> No hidden fees</li>
+                                            <li><i class="icon-ok"></i> Free 30-days trial</li>
+                                            <li><i class="icon-ok"></i> Stop anytime easily</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pricing-action">
+                                        <a href="#" class="btn btn-medium btn-theme"><i class="icon-chevron-down"></i> Sign Up</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="span3">
+                                <div class="pricing-box-wrap animated flyIn">
+                                    <div class="pricing-heading">
+                                        <h3>Just <strong>Happy</strong></h3>
+                                    </div>
+                                    <div class="pricing-terms">
+                                        <h6>&#36;15.00 / Month</h6>
+                                    </div>
+                                    <div class="pricing-content">
+                                        <ul>
+                                            <li><i class="icon-ok"></i> 100 applications</li>
+                                            <li><i class="icon-ok"></i> 24x7 support available</li>
+                                            <li><i class="icon-ok"></i> No hidden fees</li>
+                                            <li><i class="icon-ok"></i> Free 30-days trial</li>
+                                            <li><i class="icon-ok"></i> Stop anytime easily</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pricing-action">
+                                        <a href="#" class="btn btn-medium btn-theme"><i class="icon-chevron-down"></i> Sign Up</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="span12 aligncenter">
+                        <h3 class="title">What people <strong>saying</strong> about us</h3>
+                        <div class="blankline30"></div>
+
+                        <ul class="bxslider">
+                            <li>
+                                <blockquote>
+                                    Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat.Suspendisse eu erat quam. Vivamus porttitor eros quis nisi lacinia sed interdum lorem vulputate. Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis
+                                    feugiat
+                                </blockquote>
+                                <div class="testimonial-autor">
+                                    <img src="~/img/dummies/testimonial/1.png" alt="" />
+                                    <h4>Hillary Doe</h4>
+                                    <a href="#">www.companyname.com</a>
+                                </div>
+                            </li>
+                            <li>
+                                <blockquote>
+                                    Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat.Suspendisse eu erat quam. Vivamus porttitor eros quis nisi lacinia sed interdum lorem vulputate. Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis
+                                    feugiat
+                                </blockquote>
+                                <div class="testimonial-autor">
+                                    <img src="~/img/dummies/testimonial/2.png" alt="" />
+                                    <h4>Michael Doe</h4>
+                                    <a href="#">www.companyname.com</a>
+                                </div>
+                            </li>
+                            <li>
+                                <blockquote>
+                                    Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat.Suspendisse eu erat quam. Vivamus porttitor eros quis nisi lacinia sed interdum lorem vulputate. Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis
+                                    feugiat
+                                </blockquote>
+                                <div class="testimonial-autor">
+                                    <img src="~/img/dummies/testimonial/3.png" alt="" />
+                                    <h4>Mark Donovan</h4>
+                                    <a href="#">www.companyname.com</a>
+                                </div>
+                            </li>
+                            <li>
+                                <blockquote>
+                                    Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat.Suspendisse eu erat quam. Vivamus porttitor eros quis nisi lacinia sed interdum lorem vulputate. Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis
+                                    feugiat
+                                </blockquote>
+                                <div class="testimonial-autor">
+                                    <img src="~/img/dummies/testimonial/4.png" alt="" />
+                                    <h4>Marry Doe Elliot</h4>
+                                    <a href="#">www.companyname.com</a>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <div class="row">
             <div class="span3">
                 <div class="service-box aligncenter flyLeft">
                     <div class="icon">

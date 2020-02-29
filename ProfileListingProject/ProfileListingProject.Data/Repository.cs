@@ -28,7 +28,7 @@ namespace ProfileListingProject.Data
 
         public virtual IEnumerable<T> Get(
             out int total, out int totalDisplay,
-            Expression<Func<T, bool>> filter = null,
+            Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = "", int pageIndex = 1, int pageSize = 10, bool isTrackingOff = false)
         {

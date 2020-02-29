@@ -10,5 +10,6 @@ namespace ProfileListingProject.Core.Repositories.Interface
     {
         IEnumerable<Company> GetAllCompanies();
         Company GetCompaniesIncludingChild(int id);
+        Company GetCompanyByUserId(string userId);
     }
 }

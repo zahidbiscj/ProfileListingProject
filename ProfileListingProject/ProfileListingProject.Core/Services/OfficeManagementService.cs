@@ -72,6 +72,9 @@ namespace ProfileListingProject.Core.Services
             throw new NotImplementedException();
         }
 
-        
+        public Company GetCompanyByUserId(string userId)
+        {
+            return _officeUnitOfWork.CompanyRepository.GetCompanyByUserId(userId);
+        }
     }
 }

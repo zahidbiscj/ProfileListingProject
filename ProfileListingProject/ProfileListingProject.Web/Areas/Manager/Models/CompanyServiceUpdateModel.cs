@@ -22,27 +22,30 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
         public int CompanyId { get; set; }
 
         private IServiceManagement _companyServiceManagement;
-
+        private IOfficeManagementService _officeManagementService;
         public CompanyServiceUpdateModel()
         {
             _companyServiceManagement = Startup.AutoFacContainer.Resolve<IServiceManagement>();
+            _officeManagementService = Startup.AutoFacContainer.Resolve<IOfficeManagementService>();
         }
 
-        public CompanyServiceUpdateModel(IServiceManagement serviceManagement)
+        public CompanyServiceUpdateModel(IServiceManagement serviceManagement,IOfficeManagementService officeManagementService)
         {
             _companyServiceManagement = serviceManagement;
+            _officeManagementService = officeManagementService;
         }
-        public void AddNewService(string uniqueFileName)
+        public void AddNewService(string uniqueFileName, string userId)
         {
             try
             {
+                var company = _officeManagementService.GetCompanyByUserId(userId);
                 _companyServiceManagement.AddNewCompanyService(new CompanyService
                 {
                     Name = this.Name,
                     Description = this.Description,
                     PricingRate = this.PricingRate,
                     ImageUrl = uniqueFileName,
-                    CompanyId = 2
+                    CompanyId = company.Id
                 });
                 Notification = new NotificationModel("Success", "Company Service Added Successfully", NotificationType.Success);
             }

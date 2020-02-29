@@ -27,32 +27,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            //var companies = _officeManagementService.GetAllCompanies();
-            //ViewBag.Companies = companies;
-
-            var sqsClient = new AmazonSQSClient();
-            var sqsResponse = await sqsClient.ReceiveMessageAsync("https://sqs.us-east-1.amazonaws.com/847888492411/codesubmission");
-            if (sqsResponse.HttpStatusCode == System.Net.HttpStatusCode.OK)
-            {
-                foreach (var message in sqsResponse.Messages)
-                {
-                    var fileName = message.Body.Replace("name: ", "").Trim('\'');
-                    var s3Client = new AmazonS3Client();
-
-                    var s3Request = new GetObjectRequest
-                    {
-                        BucketName = "aspnetclassimage",
-                        Key = fileName
-                    };
-
-                    var response = await s3Client.GetObjectAsync(s3Request);
-
-                    var deleteQueueItemRequest = new DeleteMessageRequest("https://sqs.us-east-1.amazonaws.com/847888492411/codesubmission", message.ReceiptHandle);
-                    await sqsClient.DeleteMessageAsync(deleteQueueItemRequest);
-                }
-            }
             return View();
-
         }
 
         public IActionResult Update(int CompanyId)
@@ -73,10 +48,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         {
             try
             {
-                await model.InsertImageToS3BucketAsync(model.ProfileImage);
+                string profileNewFileName = null;// await model.InsertImageToS3BucketAsync(model.ProfileImage);
+                string officeNewFileName = null;// await model.InsertImageToS3BucketAsync(model.OfficePhoto);
                 if (ModelState.IsValid)
                 {
-                    model.EditCompany();
+                    model.EditCompany(profileNewFileName,officeNewFileName);
                 }
             }
             catch (Exception e)

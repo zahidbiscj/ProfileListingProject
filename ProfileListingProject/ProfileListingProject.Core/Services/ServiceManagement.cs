@@ -47,9 +47,21 @@ namespace ProfileListingProject.Core.Services
             _officeUnitOfWork.Save();
         }
 
-        public IEnumerable<CompanyService> GetAllCompanyServices()
+        public IEnumerable<CompanyService> GetAllCompanyServices(int companyId , int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)
         {
-            throw new NotImplementedException();
+            return _officeUnitOfWork.CompanyServiceRepository.Get(out total,
+                out totalFiltered,
+                x => x.CompanyId == companyId,
+                null,
+                "",
+                pageIndex,
+                pageSize,
+                true);
+        }
+
+        public IList<CompanyService> GetAllServicesOfCompany(int companyId)
+        {
+            return _officeUnitOfWork.CompanyServiceRepository.GetAllServicesOfCompany(companyId);
         }
 
         public CompanyService GetCompanyService(int id)

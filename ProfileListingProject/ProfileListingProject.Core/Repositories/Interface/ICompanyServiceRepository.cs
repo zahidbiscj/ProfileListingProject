@@ -9,5 +9,6 @@ namespace ProfileListingProject.Core.Repositories.Interface
     public interface ICompanyServiceRepository : IRepository<CompanyService>
     {
         CompanyService GetServiceWithPricingRate(int id);
+        IList<CompanyService> GetAllServicesOfCompany(int companyId);
     }
 }

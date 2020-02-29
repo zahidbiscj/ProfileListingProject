@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProfileListingProject.Web.Areas.Manager.Models;
@@ -36,8 +37,9 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         {
             if(ModelState.IsValid)
             {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var path = model.GetUploadedImage(model.Image.FileName);
-                model.AddNewProject(path);
+                model.AddNewProject(path,userId);
             }
             return View();
         }

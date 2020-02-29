@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProfileListingProject.Core.Enums;
@@ -20,9 +21,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
 
         public IActionResult GetCompanyService()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new CompanyServiceViewModel();
-            var data = model.GetCompanyServices(tableModel);
+            var company = model.GetCompany(userId);
+            var data = model.GetCompanyServices(tableModel,company);
             return Json(data);
         }
 
@@ -36,13 +39,14 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         [HttpPost]
         public IActionResult Add(CompanyServiceUpdateModel model)
         {
-            if(ModelState.IsValid)
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (ModelState.IsValid)
             {
                 var uniqueFileName = model.GetUploadedImage(model.Image.FileName);
-                model.AddNewService(uniqueFileName);
+                model.AddNewService(uniqueFileName,userId);
             }
             ViewBag.rateType = Enum.GetNames(typeof(RateType));
-            return View();
+            return View(model);
         }
 
         public IActionResult Edit(int id)
