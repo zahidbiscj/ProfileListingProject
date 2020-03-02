@@ -20,5 +20,6 @@ namespace ProfileListingProject.Core.Services.Interface
         void DeleteProduct(int id);
         Product GetProductByName(string name);
         ProductCategory GetProductCategory(int productId);
+        IList<Product> GetAllProductsOfCompany(int companyId);
     }
 }

@@ -29,7 +29,9 @@ namespace ProfileListingProject.Core.Repositories
             return _context.Companies.Where(x => x.Id == id)
                 .Include(nameof(Company.AreaOfOperations))
                 .Include(nameof(Company.TechnologyInfos))
-                .Include(nameof(Company.Teams)).FirstOrDefault();
+                .Include(nameof(Company.Teams))
+                .Include(nameof(Company.Projects))
+                .Include(nameof(Company.Products)).FirstOrDefault();
         }
 
         public Company GetCompanyByUserId(string userId)

@@ -8,6 +8,7 @@ namespace ProfileListingProject.Core.Repositories.Interface
 {
     public interface IProjectRepository : IRepository<Project>
     {
-
+        IList<Project> GetAllProjects(int companyId);
+        Project GetProjectByIncludingChild(int id);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProfileListingProject.Core.Services.Interface;
+using ProfileListingProject.Web.Models;
 
 namespace ProfileListingProject.Web.Controllers
 {
@@ -12,17 +13,32 @@ namespace ProfileListingProject.Web.Controllers
         public IOfficeManagementService _officeManagementService;
         public IServiceManagement _serviceManagement;
         private IProductService _productService;
-        public CompanyController(IOfficeManagementService officeManagementService,IServiceManagement serviceManagement,IProductService productService)
+        private IProjectManagementService _projectManagementService;
+        public CompanyController(IOfficeManagementService officeManagementService,IServiceManagement serviceManagement,IProductService productService,IProjectManagementService projectManagementService)
         {
             _officeManagementService = officeManagementService;
             _serviceManagement = serviceManagement;
             _productService = productService;
+            _projectManagementService = projectManagementService;
         }
-        public IActionResult Index(int id)
+        
+        public async Task<IActionResult> Index(int id)
         {
             var company = _officeManagementService.GetCompany(id);
+            var model = new CompanyIndexViewModel();
+            // if Image Not Found in the local directory then download from S3 Bucket
+            if (model.CheckAvailabilityFile(company.LogoImageUrl) == false)
+            {
+                await new CompanyIndexViewModel().DownloadCompanyProfileImageAsync(company.LogoImageUrl);
+            }
+            if(model.CheckAvailabilityFile(company.OfficePhotoUrl) == false)
+            {
+                await new CompanyIndexViewModel().DownloadCompanyOfficePhotoAsync(company.OfficePhotoUrl);
+            }
             return View(company);
         }
+
+
         [HttpGet("/Company/{companyId}/Services")]
         public IActionResult Services(int companyId)
         {
@@ -32,15 +48,38 @@ namespace ProfileListingProject.Web.Controllers
             return View(services);
         }
 
-        public IActionResult Products()
+        [HttpGet("/Company/{companyId}/Projects")]
+        public IActionResult Projects(int companyId)
         {
-
-            return View();
+            var company = _officeManagementService.GetCompany(companyId);
+            ViewBag.Projects = company.Projects;
+            return View(company.Projects);
         }
 
-        public IActionResult Projects()
+
+        [HttpGet("/Company/ProjectView/{id}")]
+        public IActionResult ProjectView(int id)
         {
-            return View();
+            var project = _projectManagementService.GetProject(id);
+            ViewBag.Project = project;
+            return View(project);
+        }
+
+        [HttpGet("/Company/{companyId}/Products")]
+        public IActionResult Products(int companyId)
+        {
+            var company = _officeManagementService.GetCompany(companyId);
+            ViewBag.Products = company.Products;
+            return View(company.Products);
+        }
+
+
+        [HttpGet("/Company/ProductView/{id}")]
+        public IActionResult ProductView(int id)
+        {
+            var product = _productService.GetProduct(id);
+            ViewBag.Products = product;
+            return View(product);
         }
     }
 }

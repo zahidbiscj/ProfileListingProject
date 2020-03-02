@@ -1,0 +1,65 @@
+﻿@model ProfileListingProject.Core.Entities.Product
+@{
+    ViewData["Title"] = "ProductView";
+}
+    <div class="row">
+        <div class="span3">
+            <button class="btn-danger" onclick="window.history.back();">Return to Previous page</button>
+        </div>
+    </div>
+<div class="row aligncenter">
+    <img class="" src="~/images/@Model.ImageUrl" alt="Product Image" />
+</div>
+
+<div class="row">
+    <div class="span12">
+        <div class="row">
+            <div class="span12">
+                <div class="aligncenter">
+                    <h3><strong>@Model.Name</strong></h3>
+                    <p>
+                        @Model.Description
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="aligncenter bold">Product Features</h3>
+                <div class="pricing-box-wrap special animated-slow flyIn">
+                    <div class="pricing-content">
+                            <div class="accordion" id="accordion2">
+                                @foreach (var item in Model.ProductFeatures)
+                                {
+                                    <div class="accordion-group">
+                                        <div class="accordion-heading">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse-@item.Id">
+                                                <i class="icon-plus icon-ok"></i> @item.Name
+                                            </a>
+                                        </div>
+                                        <div id="collapse-@item.Id" class="accordion-body collapse">
+                                            <div class="accordion-inner">
+                                                @item.Description
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="span12">
+
+    <div class="blankline30"></div>
+    <div class="solidline"></div>
+    <div class="blankline20"></div>
+
+</div>
+

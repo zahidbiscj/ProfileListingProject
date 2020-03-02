@@ -21,5 +21,19 @@ namespace ProfileListingProject.Core.Services.Interface
         Company GetCompanyByName(string name);
         IEnumerable<Company> GetAllCompanies();
         Company GetCompanyByUserId(string userId);
+        
+        void AddNewTeam(Team team);
+        IEnumerable<Team> GetTeams(
+          int companyId,
+          int pageIndex,
+          int pageSize,
+          string searchText,
+          out int total,
+          out int totalFiltered);
+        void DeleteTeam(int id);
+        IList<AreaOfOperation> GetAllAreaOfOperations();
+        IList<TechnologyInfo> GetAllTechnologyInfos();
+        void AddAreaOfOperations(IList<AreaOfOperation> areaOfOperations);
+        void AddTechnologyInfos(IList<TechnologyInfo> technologyInfos);
     }
 }

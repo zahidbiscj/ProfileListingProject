@@ -13,6 +13,9 @@ namespace ProfileListingProject.Core.UnitOfWorks
         public ICompanyRepository CompanyRepository { get; set; }
         public IProjectRepository ProjectRepository { get; set; }
         public ICompanyServiceRepository CompanyServiceRepository { get; set; }
+        public ITeamRepository TeamRepository { get; set; }
+        public ITechnologyInfoRepository TechnologyInfoRepository { get; set; }
+        public IAreaOfOperationsRepository AreaOfOperationsRepository { get; set; }
 
         public OfficeUnitOfWork(string connectionString, string migrationAssemblyName)
             : base(connectionString, migrationAssemblyName)
@@ -20,6 +23,9 @@ namespace ProfileListingProject.Core.UnitOfWorks
             CompanyRepository = new CompanyRepository(_dbContext);
             ProjectRepository = new ProjectRepository(_dbContext);
             CompanyServiceRepository = new CompanyServiceRepository(_dbContext);
+            TeamRepository = new TeamRepository(_dbContext);
+            TechnologyInfoRepository = new TechnologyInfoRepository(_dbContext);
+            AreaOfOperationsRepository = new AreaOfOperationsRepository(_dbContext);
         }
     }
 }

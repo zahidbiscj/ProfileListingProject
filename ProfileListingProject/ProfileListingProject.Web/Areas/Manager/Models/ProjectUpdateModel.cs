@@ -60,9 +60,9 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             throw new NotImplementedException();
         }
 
-        internal void Delete(int id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _projectManagementService.DeleteProject(id);
         }
 
         public void Load(int id)

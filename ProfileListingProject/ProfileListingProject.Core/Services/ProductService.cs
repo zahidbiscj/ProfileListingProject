@@ -49,9 +49,14 @@ namespace ProfileListingProject.Core.Services
             _storeUnitOfWork.Save();
         }
 
+        public IList<Product> GetAllProductsOfCompany(int companyId)
+        {
+            return _storeUnitOfWork.ProductRepository.GetAllProductsOfCompany(companyId);
+        }
+
         public Product GetProduct(int id)
         {
-            return _storeUnitOfWork.ProductRepository.GetById(id);
+            return _storeUnitOfWork.ProductRepository.GetProductByIdWithChild(id);
         }
 
         public Product GetProductByName(string name)

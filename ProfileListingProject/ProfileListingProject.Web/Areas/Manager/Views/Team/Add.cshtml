@@ -1,0 +1,51 @@
+﻿@model ProfileListingProject.Web.Areas.Manager.Models.TeamUpdateModel
+@{
+    ViewData["Title"] = "Add";
+}
+
+@section notification
+{
+    @await Html.PartialAsync("_Notification", Model.Notification)
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <form enctype="multipart/form-data" method="post" asp-controller="Team" asp-action="Add">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements disabled -->
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Add Team</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Team Name</label>
+                                        <input name="Name" type="text" class="form-control" placeholder="Example - Developer">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Count</label>
+                                        <input name="Count" type="number" class="form-control" placeholder="Number of total Developer in your company">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <!--/.col (right) -->
+            </div>
+        </form>
+    </div>
+</section>

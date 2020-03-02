@@ -21,14 +21,18 @@ namespace ProfileListingProject.Core.Services
             {
                 Name = project.Name,
                 ImageUrl = project.ImageUrl,
+                Description = project.Description,
                 DemoAccount = project.DemoAccount,
                 CompanyId = project.CompanyId
             });
+            _officeUnitOfWork.Save();
         }
 
         public void DeleteProject(int id)
         {
-            throw new NotImplementedException();
+            var project = _officeUnitOfWork.ProjectRepository.GetById(id);
+            _officeUnitOfWork.ProjectRepository.Remove(project);
+            _officeUnitOfWork.Save();
         }
 
         public void EditProject(Project Project)
@@ -36,14 +40,14 @@ namespace ProfileListingProject.Core.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Project> GetAllProjects()
+        public IList<Project> GetAllProjects(int companyId)
         {
-            throw new NotImplementedException();
+            return _officeUnitOfWork.ProjectRepository.GetAllProjects(companyId);
         }
 
         public Project GetProject(int id)
         {
-            throw new NotImplementedException();
+            return _officeUnitOfWork.ProjectRepository.GetProjectByIncludingChild(id);
         }
 
         public Project GetProjectByName(string name)
@@ -51,12 +55,12 @@ namespace ProfileListingProject.Core.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Project> GetProjects(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)
+        public IEnumerable<Project> GetProjects(int companyId,int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)
         {
             return _officeUnitOfWork.ProjectRepository.Get(
                 out total,
                 out totalFiltered,
-                x => x.Name.Contains(searchText),
+                x => x.Name.Contains(searchText) && x.CompanyId == companyId,
                 null,
                 "",
                 pageIndex,

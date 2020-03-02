@@ -74,6 +74,13 @@ namespace ProfileListingProject.Core
             builder.RegisterType<ServiceManagement>().As<IServiceManagement>()
                 .InstancePerLifetimeScope();
 
+            builder.RegisterType<TeamRepository>().As<ITeamRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<AreaOfOperationsRepository>().As<IAreaOfOperationsRepository>()
+               .InstancePerLifetimeScope();
+            builder.RegisterType<TechnologyInfoRepository>().As<ITechnologyInfoRepository>()
+               .InstancePerLifetimeScope();
+
             base.Load(builder);
         }
     }

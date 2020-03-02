@@ -6,10 +6,8 @@ using System.Text;
 
 namespace ProfileListingProject.Core.Repositories.Interface
 {
-    public interface IProductRepository : IRepository<Product>
+    public interface IAreaOfOperationsRepository : IRepository<AreaOfOperation>
     {
-        Product GetProductByName(string name);
-        Product GetProductByIdWithChild(int id);
-        IList<Product> GetAllProductsOfCompany(int companyId);
+        IList<AreaOfOperation> GetAllAreaOfOperations();
     }
 }

@@ -1,0 +1,42 @@
+﻿@model ProfileListingProject.Core.Entities.Project
+@{
+    ViewData["Title"] = "ProjectView";
+}
+
+<section id="content">
+    <div class="container">
+
+        <div class="row">
+            <div class="span3">
+                <button class="btn-danger" onclick="window.history.back();">Return to Previous page</button>
+            </div>
+        </div>
+        
+
+        <div class="row">
+            <div class="span12">
+                <img src="/images/@Model.ImageUrl" alt="Company Logo @Model.ImageUrl" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <h1 class="aligncenter">@Model.Name</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <h6>@Model.Description</h6>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <h6 class="bold">Username : @Model.DemoAccount[0].UserName</h6>
+                <h6 class="bold">Password : @Model.DemoAccount[0].Password</h6>
+                <h6 class="bold">Project Url : <a href="@Model.DemoAccount[0].Url">@Model.DemoAccount[0].Url</a></h6>
+            </div>
+        </div>
+    </div>
+</section>
+
+

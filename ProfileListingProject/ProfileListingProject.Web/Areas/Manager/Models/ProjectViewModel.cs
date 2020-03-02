@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using ProfileListingProject.Core.Entities;
 using ProfileListingProject.Core.Services.Interface;
 using ProfileListingProject.Web.Areas.Manager.Models;
 using ProfileListingProject.Web.Models;
@@ -10,20 +11,24 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
     public class ProjectViewModel : BaseModel
     {
         private IProjectManagementService _projectManagementService;
+        private IOfficeManagementService _officeManagementService;
         public ProjectViewModel()
         {
             _projectManagementService = Startup.AutoFacContainer.Resolve<IProjectManagementService>();
+            _officeManagementService = Startup.AutoFacContainer.Resolve<IOfficeManagementService>();
         }
-        public ProjectViewModel(IProjectManagementService projectManagementService)
+        public ProjectViewModel(IProjectManagementService projectManagementService,IOfficeManagementService officeManagementService)
         {
             _projectManagementService = projectManagementService;
+            _officeManagementService = officeManagementService;
         }
 
-        public object GetProjects(DataTablesAjaxRequestModel tableModel)
+        public object GetProjects(DataTablesAjaxRequestModel tableModel, int companyId)
         {
             int total = 0;
             int totalFiltered = 0;
             var records = _projectManagementService.GetProjects(
+                companyId,
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
@@ -45,6 +50,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
                     ).ToArray()
 
             };
+        }
+
+        public Company GetCompany(string userId)
+        {
+            return _officeManagementService.GetCompanyByUserId(userId);
         }
     }
 }

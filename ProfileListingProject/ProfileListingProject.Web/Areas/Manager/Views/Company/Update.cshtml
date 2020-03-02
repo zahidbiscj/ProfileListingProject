@@ -19,9 +19,19 @@
     <script>
         $(function () {
             //Initialize Select2 Elements
-            $('.select2').select2()
-        })
+            $('.select2').select2();
+            $(".js-example-tokenizer").select2({
+                tags: true
+            })
+            //$("#e12").val(["C#","SQL Server"]).select2();
+
+        });
     </script>
+}
+
+@section notification
+{
+    @await Html.PartialAsync("_Notification", Model.Notification)
 }
 
 
@@ -39,6 +49,7 @@
     <div class="container-fluid">
         <form enctype="multipart/form-data" method="post" asp-controller="Company" asp-action="Update">
             @Html.AntiForgeryToken()
+            <input type="hidden" value="@Model.Id" name="Id" />
             <div class="row">
                 <div class="col-md-12">
                     <!-- general form elements disabled -->
@@ -52,14 +63,14 @@
                                 <div class="col-sm-6">
                                     <!-- text input -->
                                     <div class="form-group">
-                                        <label>Name</label>
-                                        <input name="Name" type="text" class="form-control" placeholder="Enter your Name...">
+                                        <label for="Name">Name</label>
+                                        <input name="Name" value="@Model.Name" id="Name" type="text" class="form-control" placeholder="Enter your Name...">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Short Description</label>
-                                        <textarea name="ShortDescription" class="form-control" rows="3" placeholder="Enter Short Description..."></textarea>
+                                        @Html.TextArea("ShortDescription", null, new { @rows = "4", @cols = "50" })
                                     </div>
                                 </div>
                             </div>
@@ -67,32 +78,41 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Address</label>
-                                        <input name="Address" type="text" class="form-control" placeholder="Enter your Address...">
+                                        <input name="Address" value="@Model.Address" type="text" class="form-control" placeholder="Enter your Address...">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Phone Number</label>
-                                        <input name="Phone" type="number" class="form-control" placeholder="Example - 01891239182...">
+                                        <input name="Phone" value="@Model.Phone" type="text" class="form-control" placeholder="Example - 01891239182...">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Select Multiple Technology</label>
+                                        <label>Create Multiple Technology</label>
                                         @Html.DropDownListFor(m => m.TechnologyList,
                                        Model.TechnologyInfos.Select(x => new SelectListItem
                                             {
                                                 Text = x.Name,
                                                 Value = x.Name
-                                       }), new { @class = "select2", @multiple = "multiple", @style = "width: 100%" })
+                                       }), new { @class = "select2 js-example-tokenizer", @multiple = "multiple", @style = "width: 100%", @Id = "e12" })
+                                        <div class="editor-field">
+
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Phone Number</label>
-                                        <input name="Phone" type="number" class="form-control" placeholder="Example - 01891239182...">
+                                        <label>Create Multiple Area Of Operations </label>
+                                        @Html.DropDownListFor(m => m.AreaOfOperationsList,
+                                       Model.AreaOfOperations.Select(x => new SelectListItem
+                                            {
+                                                Text = x.Name,
+                                                Value = x.Name
+                                       }), new { @tags = true, @class = "select2 js-example-tokenizer", @multiple = "multiple", @style = "width: 100%" })
                                     </div>
                                 </div>
                             </div>
@@ -101,11 +121,24 @@
                                     <div class="form-group">
                                         <dl>
                                             <dd>
-                                                <input name="ProfileImage" type="file">
+                                                <label for="ProfileImage">Upload Profile Image</label>
+                                                <input name="ProfileImage" value="@Model.LogoImageUrl" type="file">
                                             </dd>
                                         </dl>
                                     </div>
                                 </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <dl>
+                                            <dd>
+                                                <label for="OfficePhoto">Upload Company Photo</label>
+                                                <input name="OfficePhoto" value="@Model.OfficePhotoUrl" type="file">
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <input class="btn btn-primary" type="submit" value="Submit" />

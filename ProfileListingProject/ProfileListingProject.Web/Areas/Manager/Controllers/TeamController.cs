@@ -10,56 +10,38 @@ using ProfileListingProject.Web.Models;
 namespace ProfileListingProject.Web.Areas.Manager.Controllers
 {
     [Area("Manager")]
-    public class ProjectController : Controller
+    public class TeamController : Controller
     {
         public IActionResult Index()
         {
-            var model = new ProjectViewModel();
+            var model = new TeamUpdateModel();
             return View(model);
         }
 
-        public IActionResult GetProjects()
+        public IActionResult GetTeams()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var tableModel = new DataTablesAjaxRequestModel(Request);
-            var model = new ProjectViewModel();
-            var company = model.GetCompany(userId);
-            var data = model.GetProjects(tableModel,company.Id);
+            var model = new TeamUpdateModel();
+            var data = model.GetTeams(tableModel,userId);
             return Json(data);
         }
 
         public IActionResult Add()
         {
-            var model = new ProjectUpdateModel();
+            var model = new TeamUpdateModel();
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult Add(ProjectUpdateModel model)
-        {
-            if(ModelState.IsValid)
-            {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var path = model.GetUploadedImage(model.Image.FileName);
-                model.AddNewProject(path,userId);
-            }
-            return View(model);
-        }
-
-        public IActionResult Edit(int id)
-        {
-            var model = new ProjectUpdateModel();
-            model.Load(id);
-            return View(model);
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(ProjectUpdateModel model)
+        public IActionResult Add(TeamUpdateModel model)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (ModelState.IsValid)
             {
-                //model.EditProject();
+                model.AddNewTeam(userId);
             }
             return View(model);
         }
@@ -68,7 +50,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var model = new ProjectUpdateModel();
+            var model = new TeamUpdateModel();
             model.Delete(id);
             return RedirectToAction("Index");
         }

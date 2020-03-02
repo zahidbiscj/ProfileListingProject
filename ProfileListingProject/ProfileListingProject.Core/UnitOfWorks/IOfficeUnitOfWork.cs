@@ -12,5 +12,8 @@ namespace ProfileListingProject.Core.UnitOfWorks
         ICompanyRepository CompanyRepository { get; set; }
         IProjectRepository ProjectRepository { get; set; }
         ICompanyServiceRepository CompanyServiceRepository { get; set; }
+        ITeamRepository TeamRepository { get; set; }
+        IAreaOfOperationsRepository AreaOfOperationsRepository { get; set; }
+        ITechnologyInfoRepository TechnologyInfoRepository { get; set; }
     }
 }

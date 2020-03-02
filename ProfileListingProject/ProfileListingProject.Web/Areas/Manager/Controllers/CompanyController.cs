@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Amazon;
 using Amazon.S3;
@@ -25,33 +26,32 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         {
             _officeManagementService = officeManagementService;
         }
-        public async Task<IActionResult> Index()
-        {
-            return View();
-        }
+        
 
-        public IActionResult Update(int CompanyId)
+        public IActionResult Update()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var model = new CompanyUpdateModel();
-            //model.Load(CompanyId);
-
-            var technologyInfos = new List<TechnologyInfo>() { new TechnologyInfo { Name= "alpant" },
-                new TechnologyInfo { Name = "pant"},new TechnologyInfo{ Name = "basha mia"} };
-            model.TechnologyInfos = technologyInfos.Select(x => new TechnologyInfo { Name = x.Name, Id = x.Id }).ToList();
+            model.GetDropDownList(userId);
+            model.Load(userId);
             return View(model);
         }
 
-        //Add Image to S3 Bucket 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(CompanyUpdateModel model)
         {
             try
             {
-                string profileNewFileName = null;// await model.InsertImageToS3BucketAsync(model.ProfileImage);
-                string officeNewFileName = null;// await model.InsertImageToS3BucketAsync(model.OfficePhoto);
+                string profileNewFileName, officeNewFileName;
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                 profileNewFileName = await model.InsertImageToS3BucketAsync(model.ProfileImage);
+                 officeNewFileName =  await model.InsertImageToS3BucketAsync(model.OfficePhoto);
+
                 if (ModelState.IsValid)
                 {
+                    model.AddTechnologyAreaOfOperation(userId);
                     model.EditCompany(profileNewFileName,officeNewFileName);
                 }
             }

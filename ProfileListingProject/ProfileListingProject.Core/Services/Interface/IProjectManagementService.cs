@@ -8,6 +8,7 @@ namespace ProfileListingProject.Core.Services.Interface
     public interface IProjectManagementService
     {
         IEnumerable<Project> GetProjects(
+            int companyId,
             int pageIndex,
             int pageSize,
             string searchText,
@@ -19,6 +20,6 @@ namespace ProfileListingProject.Core.Services.Interface
         void DeleteProject(int id);
 
         Project GetProjectByName(string name);
-        IEnumerable<Project> GetAllProjects();
+        IList<Project> GetAllProjects(int companyId);
     }
 }

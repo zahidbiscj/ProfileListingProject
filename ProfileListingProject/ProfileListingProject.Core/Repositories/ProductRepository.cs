@@ -19,6 +19,11 @@ namespace ProfileListingProject.Core.Repositories
             _storeContext = storeContext;
         }
 
+        public IList<Product> GetAllProductsOfCompany(int companyId)
+        {
+            return _storeContext.Products.Where(x => x.CompanyId == companyId).ToList();
+        }
+
         public Product GetProductByIdWithChild(int id)
         {
             return _storeContext.Products.Where(x => x.Id == id)

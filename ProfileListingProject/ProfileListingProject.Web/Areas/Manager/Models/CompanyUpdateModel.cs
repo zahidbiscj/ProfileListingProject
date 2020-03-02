@@ -17,12 +17,14 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
 {
     public class CompanyUpdateModel : BaseModel
     {
-        private const string bucketName = "aspnetimage";
+        private const string bucketName = "aspnetpractice";
         private const string queueUrl = "https://sqs.us-east-1.amazonaws.com/441185707589/imageupload";
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public IFormFile ProfileImage { get; set; }//LogoImageUrl
+        public string LogoImageUrl { get; set; }
+        public string OfficePhotoUrl { get; set; }
+        public IFormFile ProfileImage { get; set; }
         public IFormFile OfficePhoto { get; set; }
         public string ShortDescription { get; set; }
         public string Address { get; set; }
@@ -30,7 +32,9 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
         public IList<AreaOfOperation> AreaOfOperations { get; set; }
         public IList<TechnologyInfo> TechnologyInfos { get; set; }
         public string[] TechnologyList { get; set; }
+        public string[] AreaOfOperationsList { get; set; }
         public IList<Team> Teams { get; set; }
+        private Company company;
 
         private IOfficeManagementService _officeService;
         public CompanyUpdateModel(IOfficeManagementService officeManagementService) 
@@ -43,34 +47,85 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             _officeService = Startup.AutoFacContainer.Resolve<IOfficeManagementService>();
         }
 
+        public void GetDropDownList(string userId)
+        {
+            this.AreaOfOperations = _officeService.GetAllAreaOfOperations()
+                .GroupBy(x => new {x.Name})
+                .Select(x => x.First())
+                .ToList();
+            this.TechnologyInfos = _officeService.GetAllTechnologyInfos()
+                .GroupBy(x => new { x.Name })
+                .Select(x => x.First())
+                .ToList();
+            this.TechnologyInfos = this.TechnologyInfos.Select(x => new TechnologyInfo { Name = x.Name, Id = x.Id }).ToList();
+            this.AreaOfOperations = this.AreaOfOperations.Select(x => new AreaOfOperation { Name = x.Name, Id = x.Id }).ToList();
+
+        }
+
+        public void AddTechnologyAreaOfOperation(string userId)
+        {
+            try
+            {
+                this.company = _officeService.GetCompanyByUserId(userId);
+                this.TechnologyInfos = new List<TechnologyInfo>();
+                this.AreaOfOperations = new List<AreaOfOperation>();
+
+                if (TechnologyList != null)
+                {
+                    foreach (var item in TechnologyList)
+                    {
+                        TechnologyInfo technologyInfo = new TechnologyInfo()
+                        {
+                            Name = item,
+                            CompanyId = this.company.Id
+                        };
+                        this.TechnologyInfos.Add(technologyInfo);
+                    }
+                    _officeService.AddTechnologyInfos(this.TechnologyInfos);
+
+                }
+                if (AreaOfOperationsList != null)
+                {
+                    foreach (var item in AreaOfOperationsList)
+                    {
+                        AreaOfOperation areaOfOperation = new AreaOfOperation()
+                        {
+                            Name = item,
+                            CompanyId = this.company.Id
+                        };
+                        this.AreaOfOperations.Add(areaOfOperation);
+                    }
+                    _officeService.AddAreaOfOperations(this.AreaOfOperations);
+                }
+            }
+            catch (Exception)
+            {
+                Notification = new NotificationModel("Failed !!", "Error in Area Of Operation or Technology Info", NotificationType.Fail);
+                throw;
+            }
+        }
+
+        
         public void EditCompany(string profileNewFileName, string officeNewFileName)
         {
             try
             {
-                //var listOftechnology = TechnologyList.ToList();
-                foreach (var item in TechnologyList)
-                {
-                    new TechnologyInfo { Name = item };
-                }
                 _officeService.EditCompany(new Company()
                 {
+                    Id = this.company.Id,
                     Name = this.Name,
                     Address = this.Address,
                     LogoImageUrl = profileNewFileName,
                     ShortDescription = this.ShortDescription,
                     Phone = this.Phone,
-                    AreaOfOperations = this.AreaOfOperations,
-                    Teams = this.Teams,
-                    TechnologyInfos = new List<TechnologyInfo>() {
-                        
-                    },
                     OfficePhotoUrl = officeNewFileName
                 });
+                Notification = new NotificationModel("Success", "Company Updated Successfully", NotificationType.Success);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                Notification = new NotificationModel("Failed !!", "Failed to Update Company Profile", NotificationType.Fail);
+                throw e;
             }
         }
         public string GetRandomizedNewFileName(IFormFile imageFile)
@@ -81,13 +136,25 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             return newFileName;
         }
 
-        internal void Load(int companyId)
+        public void Load(string userId)
         {
-            throw new NotImplementedException();
+            this.company = _officeService.GetCompanyByUserId(userId);
+
+            if (this.company != null)
+            {
+                Id = this.company.Id;
+                Name = this.company.Name;
+                Address = this.company.Address;
+                ShortDescription = this.company.ShortDescription;
+                Phone = this.company.Phone;
+                LogoImageUrl = this.company.LogoImageUrl;
+                OfficePhotoUrl = this.company.OfficePhotoUrl;
+            }
         }
 
         public async Task<string> InsertImageToS3BucketAsync(IFormFile imageFile)
         {
+            if (imageFile == null) { return null; }
             var newFileName = GetRandomizedNewFileName(imageFile);
             var path = $"wwwroot/images/{newFileName}";
             WriteFileInSystemDrive(path);

@@ -1,6 +1,7 @@
-﻿@model ProfileListingProject.Web.Areas.Manager.Models.CategoryViewModel
+﻿@model ProfileListingProject.Web.Areas.Manager.Models.TeamUpdateModel
+
 @{
-    ViewData["Title"] = "Categories";
+    ViewData["Title"] = "Team Index Page";
 }
 
 @section styles
@@ -20,7 +21,7 @@
             $('#example1').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "ajax": "/Manager/Category/GetCategories",
+                "ajax": "/Manager/Team/GetTeams",
                 "columnDefs": [
                     {
                         "orderable": false,
@@ -31,18 +32,13 @@
                     },
                     {
                         "orderable": false,
-                        "targets": 2,
+                        "targets": 3,
                         "render": function (data, type, row) {
-                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/Manager/Category/Edit/${data}'" value='${data}'>
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </button>
-                                    <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </button>`;
+                            return `<button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Delete
+                                        </button>`;
                         }
                     }
                 ]
@@ -64,16 +60,12 @@
     </script>
 }
 
-@section notification
-{
-    @await Html.PartialAsync("_Notification", Model.Notification)
-}
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <h3 class="card-title">Team Index</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -82,6 +74,7 @@
                         <tr>
                             <th><input type="checkbox" /></th>
                             <th>Name</th>
+                            <th>Count</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -106,7 +99,7 @@
             </div>
             <div class="modal-body">
                 <p>One fine body&hellip;</p>
-                <form id="" action="/Company/ProjectView/Delete" method="post">
+                <form id="deleteForm" action="/Manager/Team/Delete" method="post">
                     @Html.AntiForgeryToken()
                     <input type="hidden" id="deleteId" value="" name="id" />
                 </form>

@@ -38,6 +38,12 @@
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Controllers\AccountController.cs" />
+    <Content Include="Controllers\CompanyController.cs" />
+    <Content Include="Controllers\HomeController.cs" />
+  </ItemGroup>
+
   
   
   <ItemGroup>
