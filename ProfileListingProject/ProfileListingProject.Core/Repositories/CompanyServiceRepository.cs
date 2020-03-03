@@ -21,7 +21,8 @@ namespace ProfileListingProject.Core.Repositories
 
         public IList<CompanyService> GetAllServicesOfCompany(int companyId)
         {
-            return _context.CompanyServices.Where(x => x.CompanyId == companyId).ToList();
+            return _context.CompanyServices.Where(x => x.CompanyId == companyId)
+                .Include(nameof(CompanyService.PricingRate)).ToList();
         }
 
         public CompanyService GetServiceWithPricingRate(int id)

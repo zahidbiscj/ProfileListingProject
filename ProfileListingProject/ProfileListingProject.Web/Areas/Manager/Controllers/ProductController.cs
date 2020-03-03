@@ -29,7 +29,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new ProductViewModel();
             var company = model.GetCompany(userId);
-            var data = model.GetProducts(tableModel);
+            var data = model.GetProducts(tableModel,company.Id);
             return Json(data);
         }
 

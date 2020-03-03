@@ -12,7 +12,7 @@ using ProfileListingProject.Web.Models;
 namespace ProfileListingProject.Web.Areas.Manager.Controllers
 {
     [Area("Manager")]
-    [Authorize(Roles = "Manager,Admin")]
+    [Authorize(Roles = "Manager")]
     public class CompanyServiceController : Controller
     {
         public IActionResult Index()
