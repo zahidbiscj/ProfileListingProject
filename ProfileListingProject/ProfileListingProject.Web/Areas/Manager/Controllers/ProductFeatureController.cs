@@ -20,19 +20,22 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         {
             _productFeatureService = productFeatureService;
         }
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
             var model = new ProductFeatureViewModel();
+            TempData["productId"] = id;
             return View(model);
         }
         [HttpGet]
         public IActionResult GetProductFeature()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var productIdString = TempData["productId"].ToString();
+            var productId = int.Parse(productIdString);
+            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new ProductFeatureViewModel();
-            var company = model.GetCompany(userId);
-            var data = model.GetProductFeature(tableModel,company.Id);
+            //var company = model.GetCompany(userId);
+            var data = model.GetProductFeature(tableModel,productId);
             return Json(data);
             
         }

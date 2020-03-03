@@ -29,7 +29,9 @@ namespace ProfileListingProject.Core.Services
             _storeUnitOfWork.Save();
         }
 
-        public IEnumerable<ProductFeature> GetFeatures(int pageIndex,
+        public IEnumerable<ProductFeature> GetFeatures(
+            int productId,
+            int pageIndex,
             int pageSize,
             string searchText,
             out int total, 
@@ -38,7 +40,7 @@ namespace ProfileListingProject.Core.Services
             return _storeUnitOfWork.ProductFeatureRepository.Get(
                 out total,
                 out totalFiltered,
-                x => x.Name.Contains(searchText),
+                x => x.Name.Contains(searchText) && x.ProductId == productId,
                 null,
                 "",
                 pageIndex,

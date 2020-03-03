@@ -24,11 +24,12 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             _officeManagementService = officeManagementService;
         }
 
-        public object GetProductFeature(DataTablesAjaxRequestModel tableModel, int companyId)
+        public object GetProductFeature(DataTablesAjaxRequestModel tableModel, int productId)
         {
             int total = 0;
             int totalFiltered = 0;
             var records = _productFeatureService.GetFeatures(
+                productId,
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,

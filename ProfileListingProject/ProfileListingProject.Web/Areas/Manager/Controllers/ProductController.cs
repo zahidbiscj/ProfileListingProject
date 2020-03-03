@@ -33,6 +33,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
             return Json(data);
         }
 
+        public IActionResult ProductIdPass(int id)
+        {
+            return RedirectToAction("Index", "ProductFeature", new { area = "Manager", id = id });
+        }
+
         public IActionResult Add()
        {
             var model = new ProductUpdateModel();
