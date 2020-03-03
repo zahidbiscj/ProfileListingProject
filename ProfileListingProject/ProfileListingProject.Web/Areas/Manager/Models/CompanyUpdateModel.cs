@@ -156,8 +156,8 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
         {
             if (imageFile == null) { return null; }
             var newFileName = GetRandomizedNewFileName(imageFile);
-            var path = $"wwwroot/images/{newFileName}";
-            WriteFileInSystemDrive(path);
+            var path = $"wwwroot/download/{newFileName}";
+            WriteFileInSystemDrive(path,imageFile);
 
             var client = new AmazonS3Client();
             var file = new FileInfo(path);
@@ -165,15 +165,15 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
             return newFileName;
         }
 
-        public void WriteFileInSystemDrive(string path)
+        public void WriteFileInSystemDrive(string path, IFormFile imageFile)
         {
             if (!System.IO.File.Exists(path))
             {
-                using (var imageFile = System.IO.File.OpenWrite(path))
+                using (var imageOpenWrite = System.IO.File.OpenWrite(path))
                 {
-                    using (var uploadedfile = this.ProfileImage.OpenReadStream())
+                    using (var uploadedfile = imageFile.OpenReadStream())
                     {
-                        uploadedfile.CopyTo(imageFile);
+                        uploadedfile.CopyTo(imageOpenWrite);
                     }
                 }
             }

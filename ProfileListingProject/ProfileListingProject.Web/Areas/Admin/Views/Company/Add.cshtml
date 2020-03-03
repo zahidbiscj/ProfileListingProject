@@ -4,6 +4,7 @@
 }
 
 <h1>@ViewData["Title"]</h1>
+<p class="text-bold text-red"> If you don't want to create a company just leave the Company Name blank , So that user will assign to the role. </p>
 
 @section notification
 {
@@ -21,7 +22,7 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name">Name</label>
+                <label asp-for="Name">Company Name</label>
                 <input type="text" name="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>

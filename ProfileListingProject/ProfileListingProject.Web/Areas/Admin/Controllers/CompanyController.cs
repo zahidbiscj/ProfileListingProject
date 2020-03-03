@@ -12,12 +12,12 @@ using ProfileListingProject.Web.Areas.Admin.Models;
 namespace ProfileListingProject.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class CompanyController : Controller
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Privacy", "Home");
         }
 
         public IActionResult Add()
@@ -31,7 +31,14 @@ namespace ProfileListingProject.Web.Areas.Admin.Controllers
         {
             if(ModelState.IsValid)
             {
-                await model.AddNewCompany();
+                if (model.Name == null)
+                {
+                    await model.UserAssignToRoles();
+                }
+                else
+                {
+                    await model.AddNewCompany();
+                }
             }
             model.Roles = model.GetAllRoles();
             return View(model);

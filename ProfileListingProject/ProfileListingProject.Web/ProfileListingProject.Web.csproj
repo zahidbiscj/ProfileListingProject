@@ -14,13 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Identity\Pages\Account\Login.cshtml.cs" />
-    <Compile Remove="Areas\Identity\Pages\Account\Register.cshtml.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Areas\Identity\Pages\Account\Login.cshtml" />
-    <Content Remove="Areas\Identity\Pages\Account\Register.cshtml" />
     <Content Remove="Views\Shared\_Notification.cshtml" />
   </ItemGroup>
 
@@ -62,6 +55,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Identity\" />
     <Folder Include="Areas\Manager\Data\" />
   </ItemGroup>
 

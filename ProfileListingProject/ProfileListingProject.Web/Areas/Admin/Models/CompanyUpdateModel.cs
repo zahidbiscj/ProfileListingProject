@@ -14,7 +14,7 @@ namespace ProfileListingProject.Web.Areas.Admin.Models
     {
 		public string Email { get; set; }
 		public string UserId { get; set; }
-		public string Name { get; set; }
+		public string Name { get; set; } // Company Name
 		public string Role { get; set; }
 		public List<SelectListItem> Roles { get; set; }
 
@@ -28,6 +28,7 @@ namespace ProfileListingProject.Web.Areas.Admin.Models
 			_userManager = userManager;
 			_officeManagementService = officeManagementService;
 		}
+
 		public CompanyUpdateModel()
 		{
 			_officeManagementService = Startup.AutoFacContainer.Resolve<IOfficeManagementService>();
@@ -67,5 +68,23 @@ namespace ProfileListingProject.Web.Areas.Admin.Models
 				throw e;
 			}
         }
-    }
+
+		public async Task UserAssignToRoles()
+		{
+			try
+			{
+				var user = await _userManager.FindByEmailAsync(this.Email);
+				var role = await _roleManager.FindByIdAsync(this.Role);
+				var roleResult = await _userManager.AddToRoleAsync(user, role.Name);
+
+				Notification = new NotificationModel("Success !!", "User Assigned to Role Successfully", NotificationType.Success);
+			}
+			catch (Exception e)
+			{
+				Notification = new NotificationModel("Failed", "Failed to Assign User Role", NotificationType.Fail);
+				throw e;
+			}
+		}
+
+	}
 }

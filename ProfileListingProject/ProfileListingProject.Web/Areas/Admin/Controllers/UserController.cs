@@ -14,7 +14,7 @@ using ProfileListingProject.Web.Areas.Admin.Models;
 namespace ProfileListingProject.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
 
     public class UserController : Controller
     {
