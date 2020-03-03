@@ -69,7 +69,7 @@ namespace ProfileListingProject.Core.Services
             return _storeUnitOfWork.ProductCategoryRepository.GetProductCategoryByProductId(productId);
         }
 
-        public IEnumerable<Product> GetProducts(int companyId,
+        public IEnumerable<Product> GetProducts(
             int pageIndex,
             int pageSize,
             string searchText,
@@ -79,7 +79,7 @@ namespace ProfileListingProject.Core.Services
             return _storeUnitOfWork.ProductRepository.Get(
                out total,
                out totalFiltered,
-               x => x.Name.Contains(searchText) && x.CompanyId == companyId,
+               x => x.Name.Contains(searchText),
                null,
                "",
                pageIndex,

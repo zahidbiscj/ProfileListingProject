@@ -3,97 +3,110 @@
     ViewData["Title"] = "Index";
 }
 
-<section id="content">
-    <div class="container">
+@section styles
+{
 
-        <div class="row">
-            <div class="span3">
-                <h2>@Model.Name</h2>
-            </div>
-            <div class="span6">
-                <img src="~/download/@Model.OfficePhotoUrl" alt="" class="animated bounceInDown delay1" />
-            </div>
-            <div class="span3">
-                <img src="~/download/@Model.LogoImageUrl" alt="Company Logo @Model.LogoImageUrl"/>
-            </div>
-        </div>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet" />
+}
 
-        <div class="row">
-            <div class="span12">
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                    <div class="container">
-                        <div class="row nomargin">
-                            <div class="span8 ml-0">
-                                <div class="navbar navbar-static-top">
-                                    <div class="navigation">
-                                        <nav>
-                                            <ul class="nav topnav">
-                                                <li class="active">
-                                                    <a href="/Company/Index/@Model.Id"><i class="icon-home"></i> Info</a>
-                                                </li>
-                                                <li class="dropdown">
-                                                    <a href="/Company/@Model.Id/Services">Services <i class="icon-adjust"></i></a>
-                                                </li>
-                                                <li class="dropdown">
-                                                    <a href="/Company/@Model.Id/Products">Products <i class="form-icon"></i></a>
-                                                </li>
-                                                <li class="dropdown">
-                                                    <a href="/Company/@Model.Id/Projects">Projects <i class="icon-folder-open"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="contact.html">Contact <i class="icon-phone"></i> </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
+
+@section scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+}
+
+    <section id="content">
+        <div class="container">
+
+            <div class="row">
+                <div class="span3">
+                    <h2>@Model.Name</h2>
+                </div>
+                <div class="span6">
+                    <img src="~/download/@Model.OfficePhotoUrl" alt="" class="animated bounceInDown delay1" />
+                </div>
+                <div class="span3">
+                    <img src="~/download/@Model.LogoImageUrl" alt="Company Logo @Model.LogoImageUrl" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="span12">
+                    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                        <div class="container">
+                            <div class="row nomargin">
+                                <div class="span8 ml-0">
+                                    <div class="navbar navbar-static-top">
+                                        <div class="navigation">
+                                            <nav>
+                                                <ul class="nav topnav">
+                                                    <li class="active">
+                                                        <a href="/Company/Index/@Model.Id"><i class="icon-home"></i> Info</a>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a href="/Company/@Model.Id/Services">Services <i class="icon-adjust"></i></a>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a href="/Company/@Model.Id/Products">Products <i class="form-icon"></i></a>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a href="/Company/@Model.Id/Projects">Projects <i class="icon-folder-open"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="contact.html">Contact <i class="icon-phone"></i> </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </nav>
+                    </nav>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="span4">
+                    <article>
+                        <h1>Summary</h1>
+                        <hr />
+                        <p>@Model.ShortDescription</p>
+                    </article>
+                </div>
+                <div class="span8">
+                    <aside class="right-sidebar align-right">
+                        <h2> Techonologies</h2>
+                        @*<h6>C#,Java , ASP.net Core , Sql server</h6>*@
+                        <ol>
+                            @foreach (var item in Model.TechnologyInfos)
+                            {
+                                <li>@item.Name</li>
+                            }
+                        </ol>
+                        <h2>Team</h2>
+                        <ul>
+                            @foreach (var item in Model.Teams)
+                            {
+                                <li><h6>@item.Name : @item.Count</h6></li>
+
+                            }
+                        </ul>
+                        <h2>Area Of Operations</h2>
+                        <ul>
+                            @foreach (var item in Model.AreaOfOperations)
+                            {
+                                <li><h6>@item.Name</h6></li>
+
+                            }
+                        </ul>
+                        @*<h6>Developer : 20</h6>
+                            <h6>UX designer : 5</h6>
+                            <h6>Other Staff : 5</h6>*@
+                    </aside>
+                </div>
             </div>
         </div>
-
-
-        <div class="row">
-            <div class="span4">
-                <article>
-                    <h1>Summary</h1>
-                    <hr />
-                    <p>@Model.ShortDescription</p>
-                </article>
-            </div>
-            <div class="span8">
-                <aside class="right-sidebar align-right">
-                    <h2> Techonologies</h2>
-                    @*<h6>C#,Java , ASP.net Core , Sql server</h6>*@
-                    <ol>
-                        @foreach (var item in Model.TechnologyInfos)
-                        {
-                            <li>@item.Name</li>
-                        }
-                    </ol>
-                    <h2>Team</h2>
-                    <ul>
-                        @foreach (var item in Model.Teams)
-                        {
-                            <li><h6>@item.Name : @item.Count</h6></li>
-
-                        }
-                    </ul>
-                    <h2>Area Of Operations</h2>
-                    <ul>
-                        @foreach (var item in Model.AreaOfOperations)
-                        {
-                            <li><h6>@item.Name</h6></li>
-
-                        }
-                    </ul>
-                    @*<h6>Developer : 20</h6>
-        <h6>UX designer : 5</h6>
-        <h6>Other Staff : 5</h6>*@
-                </aside>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>

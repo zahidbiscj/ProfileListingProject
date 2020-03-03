@@ -67,8 +67,13 @@ namespace ProfileListingProject.Web.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(model.ReturnUrl);
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    if (await _userManager.IsInRoleAsync(user, "Manager"))
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Manager" });
+                    }
+                    else
+                        return RedirectToAction("Index", "Home");
                 }
                 if (result.RequiresTwoFactor)
                 {

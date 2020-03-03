@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,6 +14,7 @@ using ProfileListingProject.Web.Models;
 namespace ProfileListingProject.Web.Areas.Manager.Controllers
 {
     [Area("Manager")]
+    [Authorize(Roles = "Manager,Admin")]
     public class ProductController : Controller
     {
         public IActionResult Index()
@@ -27,7 +29,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new ProductViewModel();
             var company = model.GetCompany(userId);
-            var data = model.GetProducts(tableModel,company.Id);
+            var data = model.GetProducts(tableModel);
             return Json(data);
         }
 

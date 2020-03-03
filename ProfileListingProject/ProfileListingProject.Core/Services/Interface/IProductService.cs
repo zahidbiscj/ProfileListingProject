@@ -8,7 +8,6 @@ namespace ProfileListingProject.Core.Services.Interface
     public interface IProductService
     {
         IEnumerable<Product> GetProducts(
-            int companyId,
             int pageIndex,
             int pageSize,
             string searchText,

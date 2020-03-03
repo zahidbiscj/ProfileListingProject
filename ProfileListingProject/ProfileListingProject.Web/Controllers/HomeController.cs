@@ -6,17 +6,25 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Autofac;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using ProfileListingProject.Core.Entities;
 using ProfileListingProject.Core.Services.Interface;
 using ProfileListingProject.Web.Models;
+using MailKit;
+using ProfileListingProject.Core.Services;
 
 namespace ProfileListingProject.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _config;
         private IOfficeManagementService _officeManagementService;
-        public HomeController(IOfficeManagementService officeManagementService)
+        public HomeController(IOfficeManagementService officeManagementService,ILogger<HomeController> logger,IConfiguration configuration)
         {
+            _logger = logger;
+            _config = configuration;
             _officeManagementService = officeManagementService;
         }
         public IActionResult Result()
@@ -32,6 +40,20 @@ namespace ProfileListingProject.Web.Controllers
             ViewBag.NewMembers = companies.Reverse();
             ViewBag.Companies = companies;
             return View();
+        }
+
+        public IActionResult Contact()
+        {
+            var model = new MailSendingModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Contact(MailSendingModel model)
+        {
+            model.SendingMail();
+            return View(model);
         }
 
         public IActionResult Privacy()

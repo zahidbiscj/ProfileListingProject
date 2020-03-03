@@ -21,6 +21,7 @@
   <ItemGroup>
     <Content Remove="Areas\Identity\Pages\Account\Login.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\Register.cshtml" />
+    <Content Remove="Views\Shared\_Notification.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +53,7 @@
     <PackageReference Include="AWSSDK.Core" Version="3.3.104.21" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.110.19" />
     <PackageReference Include="AWSSDK.SQS" Version="3.3.102.60" />
+    <PackageReference Include="MailKit" Version="2.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
@@ -73,6 +75,7 @@
     <None Include="Areas\Admin\Views\Shared\_Notification.cshtml" />
     <None Include="Areas\Admin\Views\User\Add.cshtml" />
     <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <None Include="Views\Shared\_Notification.cshtml" />
   </ItemGroup>
 
 

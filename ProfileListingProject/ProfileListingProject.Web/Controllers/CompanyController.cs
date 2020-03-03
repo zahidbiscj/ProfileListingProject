@@ -38,7 +38,6 @@ namespace ProfileListingProject.Web.Controllers
             return View(company);
         }
 
-
         [HttpGet("/Company/{companyId}/Services")]
         public IActionResult Services(int companyId)
         {

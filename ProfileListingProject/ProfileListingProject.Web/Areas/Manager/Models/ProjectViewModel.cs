@@ -5,6 +5,7 @@ using ProfileListingProject.Web.Areas.Manager.Models;
 using ProfileListingProject.Web.Models;
 using System;
 using System.Linq;
+using BaseModel = ProfileListingProject.Web.Areas.Manager.Models.BaseModel;
 
 namespace ProfileListingProject.Web.Areas.Manager.Controllers
 {

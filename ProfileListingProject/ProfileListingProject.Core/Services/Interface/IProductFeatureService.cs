@@ -7,7 +7,8 @@ namespace ProfileListingProject.Core.Services.Interface
 {
     public interface IProductFeatureService
     {
-        IEnumerable<ProductFeature> GetFeatures(int pageIndex,
+        IEnumerable<ProductFeature> GetFeatures(
+            int pageIndex,
             int pageSize,
             string searchText,
             out int total,

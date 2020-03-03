@@ -9,6 +9,7 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.SQS;
 using Amazon.SQS.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,6 +20,7 @@ using ProfileListingProject.Web.Areas.Manager.Models;
 namespace ProfileListingProject.Web.Areas.Manager.Controllers
 {
     [Area("Manager")]
+    [Authorize(Roles = "Manager,Admin")]
     public class CompanyController : Controller
     {
         private IOfficeManagementService _officeManagementService;
@@ -26,7 +28,6 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         {
             _officeManagementService = officeManagementService;
         }
-        
 
         public IActionResult Update()
         {

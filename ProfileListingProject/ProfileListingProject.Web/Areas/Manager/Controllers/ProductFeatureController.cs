@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProfileListingProject.Core.Services.Interface;
 using ProfileListingProject.Web.Areas.Manager.Models;
@@ -10,6 +12,7 @@ using ProfileListingProject.Web.Models;
 namespace ProfileListingProject.Web.Areas.Manager.Controllers
 {
     [Area("Manager")]
+    [Authorize(Roles = "Manager,Admin")]
     public class ProductFeatureController : Controller
     {
         private IProductFeatureService _productFeatureService;
@@ -25,9 +28,11 @@ namespace ProfileListingProject.Web.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult GetProductFeature()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new ProductFeatureViewModel();
-            var data = model.GetProductFeature(tableModel);
+            var company = model.GetCompany(userId);
+            var data = model.GetProductFeature(tableModel,company.Id);
             return Json(data);
             
         }
