@@ -45,6 +45,7 @@ namespace ProfileListingProject.Web.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(RoleUpdateModel model)
         {
             if(ModelState.IsValid)

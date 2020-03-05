@@ -14,7 +14,7 @@ using ProfileListingProject.Web.Areas.Admin.Models;
 namespace ProfileListingProject.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
 
     public class UserController : Controller
     {
@@ -29,7 +29,7 @@ namespace ProfileListingProject.Web.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Privacy", "Home");
         }
 
         public void GetUsers()
@@ -50,6 +50,7 @@ namespace ProfileListingProject.Web.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(UserUpdateModel model)
         {
             model.ReturnUrl = model.ReturnUrl ?? Url.Content("~/");

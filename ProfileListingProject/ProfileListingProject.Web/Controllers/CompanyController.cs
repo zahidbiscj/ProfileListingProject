@@ -27,11 +27,11 @@ namespace ProfileListingProject.Web.Controllers
             var company = _officeManagementService.GetCompany(id);
             var model = new CompanyIndexViewModel();
             // if Image Not Found in the local directory then download from S3 Bucket
-            if (model.CheckAvailabilityFile(company.LogoImageUrl) == false)
+            if (model.CheckAvailabilityFile(company.LogoImageUrl) == false && company.LogoImageUrl != null)
             {
                 await new CompanyIndexViewModel().DownloadCompanyProfileImageAsync(company.LogoImageUrl);
             }
-            if(model.CheckAvailabilityFile(company.OfficePhotoUrl) == false)
+            if(model.CheckAvailabilityFile(company.OfficePhotoUrl) == false && company.OfficePhotoUrl !=null)
             {
                 await new CompanyIndexViewModel().DownloadCompanyOfficePhotoAsync(company.OfficePhotoUrl);
             }

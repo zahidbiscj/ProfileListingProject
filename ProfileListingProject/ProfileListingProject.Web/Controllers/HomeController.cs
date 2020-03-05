@@ -30,6 +30,7 @@ namespace ProfileListingProject.Web.Controllers
         public IActionResult Result()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            
             //var company = new Company() { UserId = userId, Address = "sa", LogoImageUrl = "sa", Name = "assa", Phone = "21312" };
             //_officeManagementService.AddNewCompany(company);
             return View();

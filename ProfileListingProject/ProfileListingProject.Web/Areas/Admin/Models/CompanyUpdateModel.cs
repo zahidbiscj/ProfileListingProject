@@ -14,6 +14,8 @@ namespace ProfileListingProject.Web.Areas.Admin.Models
     {
 		public string Email { get; set; }
 		public string UserId { get; set; }
+		/*public IList<Company> CompaniesList { get; set; }
+		public Company Company { get; set; }*/
 		public string Name { get; set; } // Company Name
 		public string Role { get; set; }
 		public List<SelectListItem> Roles { get; set; }
@@ -22,6 +24,14 @@ namespace ProfileListingProject.Web.Areas.Admin.Models
 		private readonly UserManager<ExtendedIdentityUser> _userManager;
 
 		private readonly RoleManager<IdentityRole> _roleManager;
+
+		/*public void GetAllCompanies()
+		{
+			this.CompaniesList = _officeManagementService.GetAllCompanies().ToList();
+			this.CompaniesList = this.CompaniesList.Select(x => new Company { Name = x.Name, Id = x.Id }).ToList();
+
+		}*/
+
 		public CompanyUpdateModel(IOfficeManagementService officeManagementService, UserManager<ExtendedIdentityUser> userManager, RoleManager<IdentityRole> roleManager)
 		{
 			_roleManager = roleManager;
@@ -52,6 +62,7 @@ namespace ProfileListingProject.Web.Areas.Admin.Models
 			try
 			{
 				var user = await _userManager.FindByEmailAsync(this.Email);
+				
 				_officeManagementService.AddNewCompany(new Company
 				{
 					Name = this.Name,

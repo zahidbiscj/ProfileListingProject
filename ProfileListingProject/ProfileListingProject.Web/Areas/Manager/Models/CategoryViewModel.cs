@@ -52,7 +52,7 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
 
         public void Delete(int id)
         {
-            
+            _categoryService.DeleteCategory(id);
         }
     }
 }

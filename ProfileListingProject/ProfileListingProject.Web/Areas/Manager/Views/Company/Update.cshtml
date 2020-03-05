@@ -64,7 +64,7 @@
                                     <!-- text input -->
                                     <div class="form-group">
                                         <label for="Name">Name</label>
-                                        <input name="Name" value="@Model.Name" id="Name" type="text" class="form-control" placeholder="Enter your Name...">
+                                        <input name="Name" value="@Model.Name" id="Name" type="text" class="form-control" placeholder="Enter your Name..." required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -78,13 +78,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Address</label>
-                                        <input name="Address" value="@Model.Address" type="text" class="form-control" placeholder="Enter your Address...">
+                                        <input name="Address" value="@Model.Address" type="text" class="form-control" placeholder="Enter your Address..." required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Phone Number</label>
-                                        <input name="Phone" value="@Model.Phone" type="text" class="form-control" placeholder="Example - 01891239182...">
+                                        <input name="Phone" value="@Model.Phone" type="text" class="form-control" placeholder="Example - 01891239182..." required>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                         <dl>
                                             <dd>
                                                 <label for="ProfileImage">Upload Profile Image</label>
-                                                <input name="ProfileImage" value="@Model.LogoImageUrl" type="file">
+                                                <input name="ProfileImage" value="@Model.LogoImageUrl" type="file" required>
                                             </dd>
                                         </dl>
                                     </div>
@@ -132,7 +132,7 @@
                                         <dl>
                                             <dd>
                                                 <label for="OfficePhoto">Upload Company Photo</label>
-                                                <input name="OfficePhoto" value="@Model.OfficePhotoUrl" type="file">
+                                                <input name="OfficePhoto" value="@Model.OfficePhotoUrl" type="file" required>
                                             </dd>
                                         </dl>
                                     </div>

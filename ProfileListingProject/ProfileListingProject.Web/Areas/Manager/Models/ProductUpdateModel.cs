@@ -116,14 +116,14 @@ namespace ProfileListingProject.Web.Areas.Manager.Models
 
                 Notification = new NotificationModel("Success!", "Product successfuly updated", NotificationType.Success);
             }
-            catch (InvalidOperationException iex)
+            catch (InvalidOperationException)
             {
                 Notification = new NotificationModel(
                     "Failed!",
                     "Failed to update Product, please provide valid name",
                     NotificationType.Fail);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Notification = new NotificationModel(
                     "Failed!",

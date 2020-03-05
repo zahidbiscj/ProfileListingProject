@@ -8,15 +8,20 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Admin\**" />
-    <Content Remove="Areas\Admin\**" />
+    <!--<Content Remove="Areas\Admin\**" />-->
     <EmbeddedResource Remove="Areas\Admin\**" />
     <None Remove="Areas\Admin\**" />
   </ItemGroup>
 
-  <ItemGroup>
+  
+  <!--Start For this problem it says error when run in docker container , so removes the line -->
+  
+  <!--<ItemGroup>
     <Content Remove="Views\Shared\_Notification.cshtml" />
-  </ItemGroup>
+  </ItemGroup>-->
 
+  <!--End For this problem it says error when run in docker container , so removes the line -->
+  
   <ItemGroup>
     <Compile Include="Areas\Admin\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />

@@ -20,6 +20,7 @@
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form role="form" action="~/Admin/Role/Add" method="post">
+                    @Html.AntiForgeryToken()
                     <div class="card-body">
                         <div class="form-group">
                             <label for="roleName">Name</label>

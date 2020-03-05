@@ -31,7 +31,7 @@ namespace ProfileListingProject.Web.Areas.Admin.Controllers
         {
             if(ModelState.IsValid)
             {
-                if (model.Name == null)
+                if (string.IsNullOrWhiteSpace(model.Name))
                 {
                     await model.UserAssignToRoles();
                 }

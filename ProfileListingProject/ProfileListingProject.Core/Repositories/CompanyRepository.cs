@@ -21,6 +21,7 @@ namespace ProfileListingProject.Core.Repositories
 
         public IEnumerable<Company> GetAllCompanies()
         {
+            
             return _context.Companies.ToList();
         }
 
@@ -29,6 +30,7 @@ namespace ProfileListingProject.Core.Repositories
             return _context.Companies.Where(x => x.Id == id)
                 .Include(nameof(Company.AreaOfOperations))
                 .Include(nameof(Company.TechnologyInfos))
+                .Include(nameof(Company.Services))
                 .Include(nameof(Company.Teams))
                 .Include(nameof(Company.Projects))
                 .Include(nameof(Company.Products)).FirstOrDefault();
