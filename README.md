@@ -1,5 +1,12 @@
 # ProfileListingProject
 
+Why the Project ????????
+
+In our country, we have many software companies. These software companies sometimes do not have their own websites. Just because they do not care to make one. Nobody visits their website, so they do not build it.
+
+But these companies do care about getting new clients and customers. So they want to display their products, projects etc. But if they build their own website, then none visits or finds it. These companies suffers because they do not have enough marketing. People do not know about them. But they wish people can find them for projects.
+
+This is the portal where all software companies can register and list their products/projects. So that they can build their profile and customers/clients can search and find what they need. This way both companies and clients will get the benefits.
 
 
 
